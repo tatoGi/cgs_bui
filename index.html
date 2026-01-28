@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="ka" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard - CGS</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <button class="sidebar-toggle" id="toggleSidebar">
+          <i class="fas fa-bars"></i>
+        </button>
+        <a class="navbar-item" href="index.html">
+          <img src="assets/logo/logo.png" alt="CGS Logo" />
+        </a>
+
+        <a
+          role="button"
+          class="navbar-burger"
+          aria-label="menu"
+          aria-expanded="false"
+          data-target="sidebarMain"
+        >
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
+      <!-- Global Search using Bulma Panel style -->
+      <div class="search-container is-hidden-touch">
+        <div class="panel-block search-panel-block">
+          <p class="control has-icons-left">
+            <input
+              class="input search-input"
+              type="text"
+              placeholder="ძებნა..."
+            />
+            <span class="icon is-left">
+              <i class="fas fa-search"></i>
+            </span>
+          </p>
+        </div>
+        <p class="panel-tabs search-panel-tabs">
+          <a class="is-active">ყველა</a>
+          <a>რეპორტები</a>
+          <a>ფინანსები</a>
+          <a>მომხმარებლები</a>
+          <a>სხვა</a>
+        </p>
+      </div>
+
+      <div class="navbar-end">
+        <!-- Notifications icon -->
+        <div class="navbar-item">
+          <a class="button is-light is-rounded" style="position: relative">
+            <span class="icon">
+              <i class="fas fa-bell"></i>
+            </span>
+            <span class="notification-badge">3</span>
+          </a>
+        </div>
+
+        <!-- User Dropdown -->
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link is-arrowless">
+            <div class="user-avatar">T</div>
+            <span class="is-hidden-touch">Tato G.</span>
+          </a>
+
+          <div class="navbar-dropdown is-right">
+            <a class="navbar-item" href="#">
+              <i class="fas fa-user-circle"></i> პროფილი
+            </a>
+            <hr class="navbar-divider" />
+            <a class="navbar-item has-text-danger" href="login.html">
+              <i class="fas fa-sign-out-alt"></i> გასვლა
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebarMain">
+      <div class="sidebar-user">
+        <div class="user-avatar">T</div>
+        <div class="user-info">
+          <span class="user-name">Tato G.</span>
+          <span class="user-role">ადმინისტრატორი</span>
+        </div>
+      </div>
+
+      <nav class="sidebar-menu">
+        <a href="index.html" class="sidebar-link">
+          <i class="fas fa-home"></i> <span>მთავარი</span>
+        </a>
+        <a href="loans.html" class="sidebar-link">
+          <i class="fas fa-chart-bar"></i> <span>სესხები</span>
+        </a>
+        <a href="upload.html" class="sidebar-link">
+          <i class="fas fa-upload"></i> <span>ინფორმაციის ატვირთვა</span>
+        </a>
+
+        <div class="has-dropdown">
+          <a href="#" class="sidebar-link dropdown-trigger">
+            <i class="fas fa-exchange-alt"></i>
+            <span>ფინანსები</span>
+            <span
+              class="icon is-small is-right dropdown-icon"
+              style="margin-left: auto"
+            >
+              <i class="fas fa-angle-down"></i>
+            </span>
+          </a>
+          <div class="sidebar-dropdown">
+            <a href="finance_guarantee.html" class="submenu-link"
+              >გარანტიის საკომისიო</a
+            >
+            <a href="finance_received.html" class="submenu-link"
+              >მისაღები გარანტია</a
+            >
+            <a href="finance_transfer.html" class="submenu-link"
+              >გადასარიცხი გარანტია</a
+            >
+          </div>
+        </div>
+
+        <a href="users.html" class="sidebar-link">
+          <i class="fas fa-user"></i> <span>მომხმარებლის მართვა</span>
+        </a>
+      </nav>
+    </aside>
+    <main class="main-content">
+      <div class="container is-fluid">
+        <!-- Main Dashboard Layout (3 Columns) -->
+        <div class="columns is-variable is-4 is-desktop">
+          <!-- COLUMN 1: Tools & Actions -->
+          <div class="column is-4-desktop">
+            <!-- Status Check -->
+            <div class="dashboard-card mb-5">
+              <div class="dashboard-card-header">
+                <div class="dashboard-card-title">
+                  <i class="fas fa-search"></i> დადასტურების სტატუსის შემოწმება
+                </div>
+              </div>
+              <form
+                action="http://127.0.0.1:8000/bui/check/loanApprovalStatus"
+                method="get"
+              >
+                <div class="field">
+                  <label class="card-form-label">სესხის აიდი</label>
+                  <div class="control has-icons-left">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="შეიყვანეთ ID"
+                      name="loan_id"
+                    />
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-hashtag"></i>
+                    </span>
+                  </div>
+                </div>
+                <button class="button is-primary is-fullwidth mt-3">
+                  <span class="icon"><i class="fas fa-check"></i></span>
+                  <span>შემოწმება</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- ID Change (Warning) -->
+            <div class="dashboard-card is-warning-card mb-5">
+              <div class="dashboard-card-header">
+                <div class="dashboard-card-title has-text-warning-dark">
+                  <i class="fas fa-exchange-alt"></i> სესხის აიდის ცვლილება
+                </div>
+              </div>
+
+              <div class="warning-box">
+                <i class="fas fa-exclamation-triangle"></i>
+                <div>
+                  <strong>გაითვალისწინეთ!</strong> სესხის აიდი არის
+                  მნიშვნელოვანი ველი. გთხოვთ, დარწმუნდით, რომ გსურთ აღნიშნული
+                  ინფორმაციის ცვლილება.
+                </div>
+              </div>
+
+              <form
+                action="http://127.0.0.1:8000/bui/upload/changeLoanId"
+                method="post"
+              >
+                <div class="field">
+                  <label class="card-form-label">ძველი სესხის აიდი</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="ძველი ID"
+                      name="loan_id_old"
+                    />
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="card-form-label">ახალი სესხის აიდი</label>
+                  <div class="control">
+                    <input
+                      class="input"
+                      type="text"
+                      placeholder="ახალი ID"
+                      name="loan_id_new"
+                    />
+                  </div>
+                </div>
+                <button class="button is-warning is-light is-fullwidth mt-3">
+                  <span class="icon"><i class="fas fa-save"></i></span>
+                  <span>შეცვლა</span>
+                </button>
+              </form>
+            </div>
+
+            <!-- Upload Information List -->
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <div class="dashboard-card-title">
+                  <i class="fas fa-upload"></i> ინფორმაციის ატვირთვა
+                </div>
+              </div>
+              <div class="quick-actions-wrapper">
+                <!-- Registration & Creation -->
+                <div>
+                  <div class="action-category-title">რეგისტრაცია</div>
+                  <div class="quick-actions-grid">
+                    <a
+                      href="loan_registration.html"
+                      class="quick-action-item action-type-new"
+                    >
+                      <div class="icon-box">
+                        <i class="fas fa-user-plus"></i>
+                      </div>
+                      <span>სესხის<br />რეგისტრაცია</span>
+                    </a>
+                    <a
+                      href="micro_loan.html"
+                      class="quick-action-item action-type-new"
+                    >
+                      <div class="icon-box"><i class="fas fa-store"></i></div>
+                      <span>მიკრო<br />სესხი</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Management -->
+                <div>
+                  <div class="action-category-title">მართვა & ფინანსები</div>
+                  <div class="quick-actions-grid">
+                    <a href="#" class="quick-action-item action-type-edit">
+                      <div class="icon-box"><i class="fas fa-edit"></i></div>
+                      <span>სესხის<br />ცვლილება</span>
+                    </a>
+                    <a href="#" class="quick-action-item action-type-money">
+                      <div class="icon-box">
+                        <i class="fas fa-calendar-alt"></i>
+                      </div>
+                      <span>გრაფიკი</span>
+                    </a>
+                    <a href="#" class="quick-action-item action-type-money">
+                      <div class="icon-box">
+                        <i class="fas fa-money-bill-wave"></i>
+                      </div>
+                      <span>დაფარვა</span>
+                    </a>
+                    <a href="#" class="quick-action-item action-type-edit">
+                      <div class="icon-box">
+                        <i class="fas fa-file-invoice"></i>
+                      </div>
+                      <span>ამონაწერი</span>
+                    </a>
+                    <a href="#" class="quick-action-item action-type-money">
+                      <div class="icon-box">
+                        <i class="fas fa-percentage"></i>
+                      </div>
+                      <span>პროცენტის<br />შემცირება</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Collateral -->
+                <div>
+                  <div class="action-category-title">უზრუნველყოფა</div>
+                  <div class="quick-actions-grid">
+                    <a href="#" class="quick-action-item action-type-edit">
+                      <div class="icon-box"><i class="fas fa-sync"></i></div>
+                      <span>უზრუნვ.<br />ცვლილება</span>
+                    </a>
+                    <a href="#" class="quick-action-item action-type-money">
+                      <div class="icon-box">
+                        <i class="fas fa-university"></i>
+                      </div>
+                      <span>უზრუნვ.<br />გაყიდვა</span>
+                    </a>
+                  </div>
+                </div>
+
+                <!-- Critical Actions -->
+                <div>
+                  <div class="action-category-title">კრიტიკული</div>
+                  <div class="quick-actions-grid">
+                    <a href="#" class="quick-action-item action-type-danger">
+                      <div class="icon-box"><i class="fas fa-ban"></i></div>
+                      <span>სესხის<br />გაუქმება</span>
+                    </a>
+                    <a href="#" class="quick-action-item action-type-danger">
+                      <div class="icon-box"><i class="fas fa-gavel"></i></div>
+                      <span>სესხის<br />გადეფოლტება</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- COLUMN 2: Liabilities & Funds -->
+          <div class="column is-4-desktop">
+            <!-- Bank Liabilities -->
+            <div class="dashboard-card mb-5">
+              <div class="dashboard-card-header">
+                <div class="dashboard-card-title">
+                  <i class="fas fa-university"></i> წინა თვის ვალდებულება
+                  (ბანკი)
+                </div>
+              </div>
+              <div class="info-table-container">
+                <table class="info-table">
+                  <tbody>
+                    <tr>
+                      <td>გარანტიის საკომისიო</td>
+                      <td class="has-text-primary">0.00 ₾</td>
+                    </tr>
+                    <tr>
+                      <td>დეპოზიტზე დარიცხული პროცენტი</td>
+                      <td class="has-text-primary">0.00 ₾</td>
+                    </tr>
+                    <tr>
+                      <td>შემცირებული ძირის შესაბამისი გარანტია</td>
+                      <td class="has-text-primary">0.00 ₾</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Agency Liabilities -->
+            <div class="dashboard-card mb-5">
+              <div class="dashboard-card-header">
+                <div class="dashboard-card-title">
+                  <i class="fas fa-building"></i> წინა თვის ვალდებულება
+                  (სააგენტო)
+                </div>
+              </div>
+              <div class="info-table-container">
+                <table class="info-table">
+                  <tbody>
+                    <tr>
+                      <td>ახალი სესხების გარანტია</td>
+                      <td class="has-text-primary">0.00 ₾</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Common Funds -->
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <div class="dashboard-card-title">
+                  <i class="fas fa-wallet"></i> საერთო სახსრები
+                </div>
+              </div>
+              <div class="has-text-centered py-4">
+                <p class="is-size-7 has-text-grey uppercase mb-2">
+                  ასათვისებელი თანხა
+                </p>
+                <h2 class="title is-2 has-text-primary">148,814,778</h2>
+                <span class="tag is-light is-primary is-rounded">GEL</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- COLUMN 3: Charts -->
+          <div class="column is-4-desktop">
+            <!-- Approved Loans Chart -->
+            <div class="dashboard-card mb-5">
+              <div class="dashboard-card-header">
+                <div class="dashboard-card-title">
+                  <i class="fas fa-chart-area"></i> დამტკიცებული სესხები
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="approvedLoansChart"></canvas>
+              </div>
+            </div>
+
+            <!-- Portfolio Dynamics Chart -->
+            <div class="dashboard-card">
+              <div class="dashboard-card-header">
+                <div class="dashboard-card-title">
+                  <i class="fas fa-chart-line"></i> პორტფელის დინამიკა
+                </div>
+              </div>
+              <div class="chart-container">
+                <canvas id="portfolioChart"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+  </body>
+</html>

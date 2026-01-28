@@ -1,0 +1,595 @@
+<!doctype html>
+<html lang="ka" data-theme="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>მომხმარებლები - CGS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        .user-card {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            border-color: var(--primary-color);
+        }
+
+        .user-card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f1f3f5;
+        }
+
+        .user-card-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            flex-shrink: 0;
+        }
+
+        .user-card-info h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 0.25rem;
+        }
+
+        .user-card-info p {
+            font-size: 0.8rem;
+            color: #636e72;
+        }
+
+        .user-card-body {
+            flex-grow: 1;
+        }
+
+        .user-detail-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem 0;
+            font-size: 0.85rem;
+        }
+
+        .user-detail-label {
+            color: #636e72;
+            font-weight: 500;
+        }
+
+        .user-detail-value {
+            color: #2d3436;
+            font-weight: 600;
+        }
+
+        .user-card-footer {
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #f1f3f5;
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .user-status-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            border-radius: 8px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .user-status-active {
+            background: rgba(46, 213, 115, 0.1);
+            color: #2ed573;
+        }
+
+        .user-status-inactive {
+            background: rgba(255, 71, 87, 0.1);
+            color: #ff4757;
+        }
+
+        .user-status-pending {
+            background: rgba(255, 165, 2, 0.1);
+            color: #ffa502;
+        }
+
+        .users-header {
+            background: white;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .search-box {
+            max-width: 400px;
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 0.5rem 1rem;
+            border-radius: 10px;
+            border: 1px solid #e9ecef;
+            background: white;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #495057;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.is-active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <button class="sidebar-toggle" id="toggleSidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a class="navbar-item" href="index.html">
+                <img src="assets/logo/logo.png" alt="CGS Logo" />
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="sidebarMain">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <!-- Global Search using Bulma Panel style -->
+        <div class="search-container is-hidden-touch">
+            <div class="panel-block search-panel-block">
+                <p class="control has-icons-left">
+                    <input class="input search-input" type="text" placeholder="ძებნა..." />
+                    <span class="icon is-left">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </p>
+            </div>
+            <p class="panel-tabs search-panel-tabs">
+                <a class="is-active">ყველა</a>
+                <a>რეპორტები</a>
+                <a>ფინანსები</a>
+                <a>მომხმარებლები</a>
+                <a>სხვა</a>
+            </p>
+        </div>
+
+        <div class="navbar-end">
+            <!-- Notifications icon -->
+            <div class="navbar-item">
+                <a class="button is-light is-rounded" style="position: relative">
+                    <span class="icon">
+                        <i class="fas fa-bell"></i>
+                    </span>
+                    <span class="notification-badge">3</span>
+                </a>
+            </div>
+
+            <!-- User Dropdown -->
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link is-arrowless">
+                    <div class="user-avatar">T</div>
+                    <span class="is-hidden-touch">Tato G.</span>
+                </a>
+
+                <div class="navbar-dropdown is-right">
+                    <a class="navbar-item" href="#">
+                        <i class="fas fa-user-circle"></i> პროფილი
+                    </a>
+                    <hr class="navbar-divider" />
+                    <a class="navbar-item has-text-danger" href="login.html">
+                        <i class="fas fa-sign-out-alt"></i> გასვლა
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebarMain">
+        <div class="sidebar-user">
+            <div class="user-avatar">T</div>
+            <div class="user-info">
+                <span class="user-name">Tato G.</span>
+                <span class="user-role">ადმინისტრატორი</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="index.html" class="sidebar-link">
+                <i class="fas fa-home"></i> <span>მთავარი</span>
+            </a>
+            <a href="loans.html" class="sidebar-link">
+                <i class="fas fa-chart-bar"></i> <span>სესხები</span>
+            </a>
+            <a href="upload.html" class="sidebar-link">
+                <i class="fas fa-upload"></i> <span>ინფორმაციის ატვირთვა</span>
+            </a>
+
+            <div class="has-dropdown">
+                <a href="#" class="sidebar-link dropdown-trigger">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>ფინანსები</span>
+                    <span class="icon is-small is-right dropdown-icon" style="margin-left: auto;">
+                        <i class="fas fa-angle-down"></i>
+                    </span>
+                </a>
+                <div class="sidebar-dropdown">
+                    <a href="finance_guarantee.html" class="submenu-link">გარანტიის საკომისიო</a>
+                    <a href="finance_received.html" class="submenu-link">მისაღები გარანტია</a>
+                    <a href="finance_transfer.html" class="submenu-link">გადასარიცხი გარანტია</a>
+                </div>
+            </div>
+
+            <a href="users.html" class="sidebar-link">
+                <i class="fas fa-user"></i> <span>მომხმარებლის მართვა</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="container is-fluid">
+            <!-- Header Section -->
+            <div class="users-header">
+                <div class="level mb-4">
+                    <div class="level-left">
+                        <div>
+                            <h1 class="title is-4 mb-2">მომხმარებლების მართვა</h1>
+                            <p class="has-text-grey is-size-7">სულ: <strong>24 მომხმარებელი</strong></p>
+                        </div>
+                    </div>
+                    <div class="level-right">
+                        <button class="button is-primary is-rounded">
+                            <span class="icon"><i class="fas fa-user-plus"></i></span>
+                            <span>ახალი მომხმარებელი</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="columns">
+                    <div class="column is-6">
+                        <div class="search-box">
+                            <div class="control has-icons-left">
+                                <input class="input" type="text" placeholder="მომხმარებლის ძებნა...">
+                                <span class="icon is-left">
+                                    <i class="fas fa-search"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-6">
+                        <div class="filter-buttons is-flex is-justify-content-flex-end">
+                            <button class="filter-btn is-active">ყველა</button>
+                            <button class="filter-btn">აქტიური</button>
+                            <button class="filter-btn">არააქტიური</button>
+                            <button class="filter-btn">ადმინები</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Users Grid -->
+            <div class="columns is-multiline">
+                <!-- User Card 1 -->
+                <div class="column is-4">
+                    <div class="user-card">
+                        <div class="user-card-header">
+                            <div class="user-card-avatar">T</div>
+                            <div class="user-card-info">
+                                <h3>თათო გელაშვილი</h3>
+                                <p>ადმინისტრატორი</p>
+                            </div>
+                        </div>
+                        <div class="user-card-body">
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">ელ-ფოსტა</span>
+                                <span class="user-detail-value">tato@cgs.ge</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">ტელეფონი</span>
+                                <span class="user-detail-value">+995 555 123 456</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">რეგისტრაცია</span>
+                                <span class="user-detail-value">15 იან 2024</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">სტატუსი</span>
+                                <span class="user-status-badge user-status-active">
+                                    <i class="fas fa-check-circle mr-1"></i> აქტიური
+                                </span>
+                            </div>
+                        </div>
+                        <div class="user-card-footer">
+                            <button class="button is-small is-light is-info is-fullwidth">
+                                <i class="fas fa-eye mr-2"></i> დეტალები
+                            </button>
+                            <button class="button is-small is-light is-warning">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Card 2 -->
+                <div class="column is-4">
+                    <div class="user-card">
+                        <div class="user-card-header">
+                            <div class="user-card-avatar"
+                                style="background: linear-gradient(135deg, #FF9966, #FF5E62);">N</div>
+                            <div class="user-card-info">
+                                <h3>ნინო მამულაშვილი</h3>
+                                <p>მენეჯერი</p>
+                            </div>
+                        </div>
+                        <div class="user-card-body">
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">ელ-ფოსტა</span>
+                                <span class="user-detail-value">nino@cgs.ge</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">ტელეფონი</span>
+                                <span class="user-detail-value">+995 555 234 567</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">რეგისტრაცია</span>
+                                <span class="user-detail-value">20 იან 2024</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">სტატუსი</span>
+                                <span class="user-status-badge user-status-active">
+                                    <i class="fas fa-check-circle mr-1"></i> აქტიური
+                                </span>
+                            </div>
+                        </div>
+                        <div class="user-card-footer">
+                            <button class="button is-small is-light is-info is-fullwidth">
+                                <i class="fas fa-eye mr-2"></i> დეტალები
+                            </button>
+                            <button class="button is-small is-light is-warning">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Card 3 -->
+                <div class="column is-4">
+                    <div class="user-card">
+                        <div class="user-card-header">
+                            <div class="user-card-avatar"
+                                style="background: linear-gradient(135deg, #a8c0ff, #3f2b96);">G</div>
+                            <div class="user-card-info">
+                                <h3>გიორგი ბერიძე</h3>
+                                <p>ანალიტიკოსი</p>
+                            </div>
+                        </div>
+                        <div class="user-card-body">
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">ელ-ფოსტა</span>
+                                <span class="user-detail-value">giorgi@cgs.ge</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">ტელეფონი</span>
+                                <span class="user-detail-value">+995 555 345 678</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">რეგისტრაცია</span>
+                                <span class="user-detail-value">22 იან 2024</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">სტატუსი</span>
+                                <span class="user-status-badge user-status-pending">
+                                    <i class="fas fa-clock mr-1"></i> განხილვაში
+                                </span>
+                            </div>
+                        </div>
+                        <div class="user-card-footer">
+                            <button class="button is-small is-light is-info is-fullwidth">
+                                <i class="fas fa-eye mr-2"></i> დეტალები
+                            </button>
+                            <button class="button is-small is-light is-warning">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Card 4 -->
+                <div class="column is-4">
+                    <div class="user-card">
+                        <div class="user-card-header">
+                            <div class="user-card-avatar"
+                                style="background: linear-gradient(135deg, #fbc2eb, #a6c1ee);">M</div>
+                            <div class="user-card-info">
+                                <h3>მარიამ ხუციშვილი</h3>
+                                <p>ოპერატორი</p>
+                            </div>
+                        </div>
+                        <div class="user-card-body">
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">ელ-ფოსტა</span>
+                                <span class="user-detail-value">mariam@cgs.ge</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">ტელეფონი</span>
+                                <span class="user-detail-value">+995 555 456 789</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">რეგისტრაცია</span>
+                                <span class="user-detail-value">25 იან 2024</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">სტატუსი</span>
+                                <span class="user-status-badge user-status-active">
+                                    <i class="fas fa-check-circle mr-1"></i> აქტიური
+                                </span>
+                            </div>
+                        </div>
+                        <div class="user-card-footer">
+                            <button class="button is-small is-light is-info is-fullwidth">
+                                <i class="fas fa-eye mr-2"></i> დეტალები
+                            </button>
+                            <button class="button is-small is-light is-warning">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Card 5 -->
+                <div class="column is-4">
+                    <div class="user-card">
+                        <div class="user-card-header">
+                            <div class="user-card-avatar"
+                                style="background: linear-gradient(135deg, #f093fb, #f5576c);">L</div>
+                            <div class="user-card-info">
+                                <h3>ლევან კვირიკაშვილი</h3>
+                                <p>მენეჯერი</p>
+                            </div>
+                        </div>
+                        <div class="user-card-body">
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">ელ-ფოსტა</span>
+                                <span class="user-detail-value">levan@cgs.ge</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">ტელეფონი</span>
+                                <span class="user-detail-value">+995 555 567 890</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">რეგისტრაცია</span>
+                                <span class="user-detail-value">10 იან 2024</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">სტატუსი</span>
+                                <span class="user-status-badge user-status-inactive">
+                                    <i class="fas fa-times-circle mr-1"></i> არააქტიური
+                                </span>
+                            </div>
+                        </div>
+                        <div class="user-card-footer">
+                            <button class="button is-small is-light is-info is-fullwidth">
+                                <i class="fas fa-eye mr-2"></i> დეტალები
+                            </button>
+                            <button class="button is-small is-light is-warning">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- User Card 6 -->
+                <div class="column is-4">
+                    <div class="user-card">
+                        <div class="user-card-header">
+                            <div class="user-card-avatar"
+                                style="background: linear-gradient(135deg, #4facfe, #00f2fe);">S</div>
+                            <div class="user-card-info">
+                                <h3>სალომე ჯავახიშვილი</h3>
+                                <p>ოპერატორი</p>
+                            </div>
+                        </div>
+                        <div class="user-card-body">
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">ელ-ფოსტა</span>
+                                <span class="user-detail-value">salome@cgs.ge</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">ტელეფონი</span>
+                                <span class="user-detail-value">+995 555 678 901</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">რეგისტრაცია</span>
+                                <span class="user-detail-value">18 იან 2024</span>
+                            </div>
+                            <div class="user-detail-item">
+                                <span class="user-detail-label">სტატუსი</span>
+                                <span class="user-status-badge user-status-active">
+                                    <i class="fas fa-check-circle mr-1"></i> აქტიური
+                                </span>
+                            </div>
+                        </div>
+                        <div class="user-card-footer">
+                            <button class="button is-small is-light is-info is-fullwidth">
+                                <i class="fas fa-eye mr-2"></i> დეტალები
+                            </button>
+                            <button class="button is-small is-light is-warning">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <nav class="pagination is-centered is-rounded mt-5" role="navigation" aria-label="pagination">
+                <a class="pagination-previous">წინა</a>
+                <a class="pagination-next">შემდეგი</a>
+                <ul class="pagination-list">
+                    <li><a class="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a></li>
+                    <li><a class="pagination-link" aria-label="Goto page 2">2</a></li>
+                    <li><a class="pagination-link" aria-label="Goto page 3">3</a></li>
+                    <li><span class="pagination-ellipsis">&hellip;</span></li>
+                    <li><a class="pagination-link" aria-label="Goto page 8">8</a></li>
+                </ul>
+            </nav>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script>
+        // Filter buttons functionality
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', function () {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
+                this.classList.add('is-active');
+            });
+        });
+    </script>
+</body>
+
+</html>

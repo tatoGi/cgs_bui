@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ka" data-theme="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard - CGS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <button class="sidebar-toggle" id="toggleSidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a class="navbar-item" href="index.html">
+                <img src="assets/logo/logo.png" alt="CGS Logo" />
+            </a>
+
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="sidebarMain">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+
+        <!-- Global Search using Bulma Panel style -->
+        <div class="search-container is-hidden-touch">
+            <div class="panel-block search-panel-block">
+                <p class="control has-icons-left">
+                    <input class="input search-input" type="text" placeholder="ძებნა..." />
+                    <span class="icon is-left">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </p>
+            </div>
+            <p class="panel-tabs search-panel-tabs">
+                <a class="is-active">ყველა</a>
+                <a>რეპორტები</a>
+                <a>ფინანსები</a>
+                <a>მომხმარებლები</a>
+                <a>სხვა</a>
+            </p>
+        </div>
+
+        <div class="navbar-end">
+            <!-- Notifications icon -->
+            <div class="navbar-item">
+                <a class="button is-light is-rounded" style="position: relative">
+                    <span class="icon">
+                        <i class="fas fa-bell"></i>
+                    </span>
+                    <span class="notification-badge">3</span>
+                </a>
+            </div>
+
+            <!-- User Dropdown -->
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link is-arrowless">
+                    <div class="user-avatar">T</div>
+                    <span class="is-hidden-touch">Tato G.</span>
+                </a>
+
+                <div class="navbar-dropdown is-right">
+                    <a class="navbar-item" href="#">
+                        <i class="fas fa-user-circle"></i> პროფილი
+                    </a>
+                    <hr class="navbar-divider" />
+                    <a class="navbar-item has-text-danger" href="login.html">
+                        <i class="fas fa-sign-out-alt"></i> გასვლა
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebarMain">
+        <div class="sidebar-user">
+            <div class="user-avatar">T</div>
+            <div class="user-info">
+                <span class="user-name">Tato G.</span>
+                <span class="user-role">ადმინისტრატორი</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-menu">
+            <a href="index.html" class="sidebar-link">
+                <i class="fas fa-home"></i> <span>მთავარი</span>
+            </a>
+            <a href="loans.html" class="sidebar-link">
+                <i class="fas fa-chart-bar"></i> <span>სესხები</span>
+            </a>
+            <a href="upload.html" class="sidebar-link">
+                <i class="fas fa-upload"></i> <span>ინფორმაციის ატვირთვა</span>
+            </a>
+
+            <div class="has-dropdown">
+                <a href="#" class="sidebar-link dropdown-trigger">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>ფინანსები</span>
+                    <span class="icon is-small is-right dropdown-icon" style="margin-left: auto;">
+                        <i class="fas fa-angle-down"></i>
+                    </span>
+                </a>
+                <div class="sidebar-dropdown">
+                    <a href="finance_guarantee.html" class="submenu-link">გარანტიის საკომისიო</a>
+                    <a href="finance_received.html" class="submenu-link">მისაღები გარანტია</a>
+                    <a href="finance_transfer.html" class="submenu-link">გადასარიცხი გარანტია</a>
+                </div>
+            </div>
+
+            <a href="users.html" class="sidebar-link">
+                <i class="fas fa-user"></i> <span>მომხმარებლის მართვა</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="container is-fluid">
+            <!-- Filter Section -->
+            <div class="filter-card">
+                <div class="filter-header">
+                    <h2 class="filter-title">
+                        <i class="fas fa-filter"></i> ფილტრაცია
+                    </h2>
+                    <button class="button is-small is-ghost collapse-icon">
+                        <i class="fas fa-chevron-up"></i>
+                    </button>
+                </div>
+
+                <div class="filter-body">
+                    <form action="http://127.0.0.1:8000/bui/loans" method="get" id="filter-form">
+
+                        <span class="filter-section-label">ძირითადი ინფორმაცია</span>
+                        <div class="columns is-multiline">
+                            <div class="column is-3">
+                                <div class="field">
+                                    <label class="label">კომპონენტი</label>
+                                    <div class="control has-icons-left">
+                                        <div class="select is-fullwidth">
+                                            <select name="component" id="filter-form-component">
+                                                <option value="">ყველა კატეგორია</option>
+                                                <option value="2">საგარანტიო რესტრუქტურიზაცია</option>
+                                                <option value="3">უნივერსალური პროგრამა</option>
+                                                <option value="4">შეღავათიანი აგროკრედიტი</option>
+                                                <option value="1">საგარანტიო კომპონენტი</option>
+                                                <option value="5">მიკრომეწარმეობის ხელშეწყობა</option>
+                                                <option value="6">მიკრომეწარმეობის ხელშეწყობა (სუბსიდირება)</option>
+                                            </select>
+                                        </div>
+                                        <div class="icon is-small is-left">
+                                            <i class="fas fa-layer-group"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-3">
+                                <div class="field">
+                                    <label class="label">მიზნობრიობა</label>
+                                    <div class="control has-icons-left">
+                                        <div class="select is-fullwidth">
+                                            <select name="purpose" id="filter-form-purpose">
+                                                <option value="">აირჩიეთ მიზნობრიობა</option>
+                                                <option value="1">საბრუნავი საშუალება</option>
+                                                <option value="2">ძირითადი საშუალება</option>
+                                                <option value="3">შერეული</option>
+                                                <option value="4">საოპერაციო ხარჯები</option>
+                                            </select>
+                                        </div>
+                                        <div class="icon is-small is-left">
+                                            <i class="fas fa-bullseye"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-3">
+                                <div class="field">
+                                    <label class="label">პ/ნ ან ს/კ</label>
+                                    <div class="control has-icons-left">
+                                        <input class="input" type="text" name="tax_code" placeholder="ძებნა კოდით...">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-fingerprint"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-3">
+                                <div class="field">
+                                    <label class="label">სესხის ID</label>
+                                    <div class="control has-icons-left">
+                                        <input class="input" type="text" name="loan_id" placeholder="მაგ: 10293">
+                                        <span class="icon is-small is-left">
+                                            <i class="fas fa-hashtag"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <span class="filter-section-label mt-4">თარიღები და პერიოდი</span>
+                        <div class="columns is-multiline is-vcentered">
+                            <div class="column is-4">
+                                <div class="field">
+                                    <label class="label">თარიღის ტიპი</label>
+                                    <div class="control">
+                                        <div class="date-type-selector">
+                                            <label class="radio">
+                                                <input type="radio" name="date" value="loan_date" checked>
+                                                დამტკიცების
+                                            </label>
+                                            <label class="radio">
+                                                <input type="radio" name="date" value="issue_date">
+                                                გაცემის
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-4">
+                                <div class="field">
+                                    <label class="label">პერიოდი (დან - მდე)</label>
+                                    <div class="field has-addons">
+                                        <div class="control is-expanded has-icons-left">
+                                            <input class="input" type="date" name="date_from" value="2024-01-27">
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                        <div class="control">
+                                            <a class="button is-static">
+                                                <i class="fas fa-arrow-right is-size-7"></i>
+                                            </a>
+                                        </div>
+                                        <div class="control is-expanded has-icons-left">
+                                            <input class="input" type="date" name="date_to" value="2026-01-27">
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-calendar-alt"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hidden Values Select (Can be shown in a modal if needed, keeping mostly hidden or simplified for now) -->
+                            <!-- Or we can add a simple dropdown for columns -->
+                            <div class="column is-4">
+                                <div class="field">
+                                    <label class="label">სვეტების ჩვენება</label>
+                                    <div class="control">
+                                        <div class="dropdown is-hoverable is-right is-fullwidth">
+                                            <div class="dropdown-trigger" style="width: 100%;">
+                                                <button class="button is-fullwidth" aria-haspopup="true"
+                                                    aria-controls="dropdown-menu" type="button">
+                                                    <span><i class="fas fa-columns mr-2"></i> პარამეტრები</span>
+                                                    <span class="icon is-small">
+                                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                            <div class="dropdown-menu" id="dropdown-menu" role="menu"
+                                                style="min-width: 250px;">
+                                                <div class="dropdown-content pl-4 pr-4 pt-3 pb-3">
+                                                    <p class="is-size-7 has-text-grey mb-2 uppercase">აირჩიეთ სვეტები
+                                                    </p>
+                                                    <label class="checkbox is-block mb-1">
+                                                        <input type="checkbox" checked disabled> კომპონენტი
+                                                    </label>
+                                                    <label class="checkbox is-block mb-1">
+                                                        <input type="checkbox" checked> სესხის ID
+                                                    </label>
+                                                    <label class="checkbox is-block mb-1">
+                                                        <input type="checkbox" checked> სრული სახელი
+                                                    </label>
+                                                    <label class="checkbox is-block mb-1">
+                                                        <input type="checkbox" checked> თანხა
+                                                    </label>
+                                                    <label class="checkbox is-block mb-1">
+                                                        <input type="checkbox"> ელ-ფოსტა
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="level mt-5 pt-3" style="border-top: 1px solid #f1f3f5;">
+                            <div class="level-left">
+                                <div class="keywords-container">
+                                    <!-- Dynamic tags will go here -->
+                                </div>
+                            </div>
+                            <div class="level-right">
+                                <div class="buttons">
+                                    <button type="reset" class="button is-light is-rounded">
+                                        გასუფთავება
+                                    </button>
+                                    <button type="submit" class="button is-primary is-rounded px-5">
+                                        <i class="fas fa-search mr-2"></i> ფილტრაცია
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Table Section -->
+            <div class="table-container-card">
+                <div class="table-header">
+                    <h3 class="table-title">
+                        <span class="icon-text">
+                            <span class="icon has-text-primary mr-2">
+                                <i class="fas fa-list-ul"></i>
+                            </span>
+                            <span>ნაპოვნია სესხები:</span>
+                        </span>
+                        <span class="tag is-primary is-light is-rounded">156</span>
+                    </h3>
+
+                    <div class="buttons">
+                        <button class="button is-small is-outlined is-success is-rounded">
+                            <i class="fas fa-file-excel mr-2"></i> ექსპორტი
+                        </button>
+                    </div>
+                </div>
+
+                <div class="table-scroll-wrapper">
+                    <table class="custom-table">
+                        <thead>
+                            <tr>
+                                <th>სტატუსი</th>
+                                <th>ID</th>
+                                <th>კლიენტი</th>
+                                <th>კომპონენტი</th>
+                                <th>მიზნობრიობა</th>
+                                <th>თანხა</th>
+                                <th>თარიღი</th>
+                                <th>მოქმედება</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Row 1 -->
+                            <tr>
+                                <td>
+                                    <span class="status-tag status-approved">
+                                        <i class="fas fa-check-circle"></i> აქტიური
+                                    </span>
+                                </td>
+                                <td class="has-text-weight-bold">#10293</td>
+                                <td>
+                                    <div class="is-flex is-align-items-center">
+                                        <div class="user-avatar is-small mr-2"
+                                            style="width: 28px; height: 28px; font-size: 0.7rem;">N</div>
+                                        <span class="has-text-weight-semibold">ნოდარ ყ.</span>
+                                    </div>
+                                    <span class="is-size-7 has-text-grey">ID: 01024002933</span>
+                                </td>
+                                <td>შეღავათიანი აგროკრედიტი</td>
+                                <td>საბრუნავი საშუალება</td>
+                                <td class="has-text-primary has-text-weight-bold">50,000 GEL</td>
+                                <td>27 იან 2024</td>
+                                <td>
+                                    <button class="button is-small is-light is-info is-rounded">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- Row 2 -->
+                            <tr>
+                                <td>
+                                    <span class="status-tag status-pending">
+                                        <i class="fas fa-clock"></i> განხილვაში
+                                    </span>
+                                </td>
+                                <td class="has-text-weight-bold">#10294</td>
+                                <td>
+                                    <div class="is-flex is-align-items-center">
+                                        <div class="user-avatar is-small mr-2"
+                                            style="width: 28px; height: 28px; font-size: 0.7rem; background: linear-gradient(135deg, #FF9966, #FF5E62);">
+                                            G</div>
+                                        <span class="has-text-weight-semibold">გიორგი მ.</span>
+                                    </div>
+                                    <span class="is-size-7 has-text-grey">ID: 59001005522</span>
+                                </td>
+                                <td>უნივერსალური პროგრამა</td>
+                                <td>ძირითადი საშუალება</td>
+                                <td class="has-text-primary has-text-weight-bold">120,000 GEL</td>
+                                <td>26 იან 2024</td>
+                                <td>
+                                    <button class="button is-small is-light is-info is-rounded">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                            <!-- Row 3 -->
+                            <tr>
+                                <td>
+                                    <span class="status-tag status-rejected">
+                                        <i class="fas fa-times-circle"></i> უარყოფილი
+                                    </span>
+                                </td>
+                                <td class="has-text-weight-bold">#10289</td>
+                                <td>
+                                    <div class="is-flex is-align-items-center">
+                                        <div class="user-avatar is-small mr-2"
+                                            style="width: 28px; height: 28px; font-size: 0.7rem; background: linear-gradient(135deg, #a8c0ff, #3f2b96);">
+                                            L</div>
+                                        <span class="has-text-weight-semibold">შპს აგრო</span>
+                                    </div>
+                                    <span class="is-size-7 has-text-grey">ID: 405022114</span>
+                                </td>
+                                <td>საგარანტიო სქემა</td>
+                                <td>შერეული</td>
+                                <td class="has-text-primary has-text-weight-bold">25,000 USD</td>
+                                <td>25 იან 2024</td>
+                                <td>
+                                    <button class="button is-small is-light is-info is-rounded">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
+                    <a class="pagination-previous">წინა</a>
+                    <a class="pagination-next">შემდეგი</a>
+                    <ul class="pagination-list">
+                        <li><a class="pagination-link is-current" aria-label="Page 1" aria-current="page">1</a></li>
+                        <li><a class="pagination-link" aria-label="Goto page 2">2</a></li>
+                        <li><a class="pagination-link" aria-label="Goto page 3">3</a></li>
+                        <li><span class="pagination-ellipsis">&hellip;</span></li>
+                        <li><a class="pagination-link" aria-label="Goto page 12">12</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="ka" data-theme="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>გარანტიის საკომისიო - CGS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        .breadcrumb-custom {
+            background: transparent;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb-custom li {
+            font-size: 0.85rem;
+            color: #636e72;
+        }
+
+        .breadcrumb-custom li.is-active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .breadcrumb-custom li+li::before {
+            content: "›";
+            color: #b2bec3;
+            padding: 0 0.5rem;
+        }
+
+        .finance-filter-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .finance-filter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #f1f3f5;
+        }
+
+        .finance-filter-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #2d3436;
+            display: flex;
+            align-items: center;
+        }
+
+        .finance-filter-title i {
+            margin-right: 0.75rem;
+            color: var(--primary-color);
+            font-size: 1.2rem;
+        }
+
+        .results-card {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .results-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #2d3436;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .summary-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            border-left: 4px solid var(--primary-color);
+            transition: all 0.3s ease;
+        }
+
+        .summary-item:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .summary-label {
+            font-size: 0.8rem;
+            color: #636e72;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 0.5rem;
+        }
+
+        .summary-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .summary-currency {
+            font-size: 0.9rem;
+            color: #636e72;
+            margin-left: 0.25rem;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-state-icon {
+            font-size: 4rem;
+            color: #dfe6e9;
+            margin-bottom: 1rem;
+        }
+
+        .empty-state-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #636e72;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-state-text {
+            color: #b2bec3;
+            font-size: 0.9rem;
+        }
+
+        .collapse-btn {
+            background: transparent;
+            border: none;
+            color: #636e72;
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 0.5rem;
+            border-radius: 8px;
+        }
+
+        .collapse-btn:hover {
+            background: #f1f3f5;
+            color: var(--primary-color);
+        }
+
+        .collapse-btn i {
+            transition: transform 0.3s;
+        }
+
+        .is-collapsed .collapse-btn i {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <button class="sidebar-toggle" id="toggleSidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a class="navbar-item" href="index.html">
+                <img src="assets/logo/logo.png" alt="CGS Logo" />
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="sidebarMain">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <a class="button is-light is-rounded" style="position: relative">
+                    <span class="icon"><i class="fas fa-bell"></i></span>
+                    <span class="notification-badge">3</span>
+                </a>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link is-arrowless">
+                    <div class="user-avatar">T</div>
+                    <span class="is-hidden-touch">Tato G.</span>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    <a class="navbar-item" href="#"><i class="fas fa-user-circle"></i> პროფილი</a>
+                    <hr class="navbar-divider" />
+                    <a class="navbar-item has-text-danger" href="login.html"><i class="fas fa-sign-out-alt"></i>
+                        გასვლა</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <aside class="sidebar" id="sidebarMain">
+        <div class="sidebar-user">
+            <div class="user-avatar">T</div>
+            <div class="user-info">
+                <span class="user-name">Tato G.</span>
+                <span class="user-role">ადმინისტრატორი</span>
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="index.html" class="sidebar-link">
+                <i class="fas fa-home"></i> <span>მთავარი</span>
+            </a>
+            <a href="loans.html" class="sidebar-link">
+                <i class="fas fa-chart-bar"></i> <span>სესხები</span>
+            </a>
+            <a href="upload.html" class="sidebar-link">
+                <i class="fas fa-upload"></i> <span>ინფორმაციის ატვირთვა</span>
+            </a>
+            <div class="has-dropdown">
+                <a href="#" class="sidebar-link dropdown-trigger">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>ფინანსები</span>
+                    <span class="icon is-small is-right dropdown-icon" style="margin-left: auto;">
+                        <i class="fas fa-angle-down"></i>
+                    </span>
+                </a>
+                <div class="sidebar-dropdown">
+                    <a href="finance_guarantee.html" class="submenu-link">გარანტიის საკომისიო</a>
+                    <a href="finance_received.html" class="submenu-link">მისაღები გარანტია</a>
+                    <a href="finance_transfer.html" class="submenu-link">გადასარიცხი გარანტია</a>
+                </div>
+            </div>
+            <a href="users.html" class="sidebar-link">
+                <i class="fas fa-user"></i> <span>მომხმარებლის მართვა</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="container is-fluid">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb-custom" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="index.html">მთავარი</a></li>
+                    <li><a href="#">ფინანსები</a></li>
+                    <li class="is-active">გარანტიის საკომისიო</li>
+                </ul>
+            </nav>
+
+            <!-- Filter Card -->
+            <div class="finance-filter-card" id="filterCard">
+                <div class="finance-filter-header">
+                    <h2 class="finance-filter-title">
+                        <i class="fas fa-filter"></i>
+                        ფილტრაცია
+                    </h2>
+                    <button class="collapse-btn" onclick="toggleFilter()">
+                        <i class="fas fa-chevron-up"></i>
+                    </button>
+                </div>
+
+                <div class="filter-body" id="filterBody">
+                    <form action="http://127.0.0.1:8000/bui/financing/guarantee_fee" method="get">
+                        <div class="columns">
+                            <!-- Bank Selection -->
+                            <div class="column is-4">
+                                <div class="field">
+                                    <label class="label">ბანკი</label>
+                                    <div class="control has-icons-left">
+                                        <div class="select is-fullwidth">
+                                            <select name="bank" id="financing-bank">
+                                                <option value="">აირჩიეთ ბანკი</option>
+                                                <option value="2" selected>პროკრედიტ ბანკი</option>
+                                                <option value="3">თიბისი ბანკი</option>
+                                                <option value="4">საქართველოს ბანკი</option>
+                                                <option value="5">ლიბერთი ბანკი</option>
+                                            </select>
+                                        </div>
+                                        <span class="icon is-left">
+                                            <i class="fas fa-university"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Month Selection -->
+                            <div class="column is-3">
+                                <div class="field">
+                                    <label class="label">თვე</label>
+                                    <div class="control has-icons-left">
+                                        <div class="select is-fullwidth">
+                                            <select name="month" id="financing-dates-month">
+                                                <option value="1">იანვარი</option>
+                                                <option value="2">თებერვალი</option>
+                                                <option value="3">მარტი</option>
+                                                <option value="4">აპრილი</option>
+                                                <option value="5">მაისი</option>
+                                                <option value="6">ივნისი</option>
+                                                <option value="7">ივლისი</option>
+                                                <option value="8">აგვისტო</option>
+                                                <option value="9">სექტემბერი</option>
+                                                <option value="10">ოქტომბერი</option>
+                                                <option value="11">ნოემბერი</option>
+                                                <option value="12" selected>დეკემბერი</option>
+                                            </select>
+                                        </div>
+                                        <span class="icon is-left">
+                                            <i class="fas fa-calendar-alt"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Year Selection -->
+                            <div class="column is-3">
+                                <div class="field">
+                                    <label class="label">წელი</label>
+                                    <div class="control has-icons-left">
+                                        <div class="select is-fullwidth">
+                                            <select name="year" id="financing-dates-year">
+                                                <option value="2023">2023</option>
+                                                <option value="2024">2024</option>
+                                                <option value="2025" selected>2025</option>
+                                                <option value="2026">2026</option>
+                                            </select>
+                                        </div>
+                                        <span class="icon is-left">
+                                            <i class="fas fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submit Button -->
+                            <div class="column is-2">
+                                <label class="label">&nbsp;</label>
+                                <button type="submit" class="button is-primary is-fullwidth">
+                                    <span class="icon">
+                                        <i class="fas fa-search"></i>
+                                    </span>
+                                    <span>გაფილტრვა</span>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Results Card -->
+            <div class="results-card">
+                <div class="results-header">
+                    <h3 class="results-title">
+                        <span class="icon-text">
+                            <span class="icon has-text-primary">
+                                <i class="fas fa-chart-line"></i>
+                            </span>
+                            <span>შედეგები</span>
+                        </span>
+                    </h3>
+                    <div class="buttons">
+                        <button class="button is-small is-light is-success">
+                            <span class="icon"><i class="fas fa-file-excel"></i></span>
+                            <span>ექსპორტი</span>
+                        </button>
+                        <button class="button is-small is-light is-info">
+                            <span class="icon"><i class="fas fa-print"></i></span>
+                            <span>ბეჭდვა</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Summary Grid -->
+                <div class="summary-grid">
+                    <div class="summary-item">
+                        <div class="summary-label">გარანტიის საკომისიო</div>
+                        <div class="summary-value">
+                            0.00 <span class="summary-currency">₾</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-item" style="border-left-color: #2ed573;">
+                        <div class="summary-label">დეპოზიტზე დარიცხული პროცენტი</div>
+                        <div class="summary-value" style="color: #2ed573;">
+                            0.00 <span class="summary-currency">₾</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-item" style="border-left-color: #ffa502;">
+                        <div class="summary-label">შემცირებული ძირის შესაბამისი გარანტია</div>
+                        <div class="summary-value" style="color: #ffa502;">
+                            0.00 <span class="summary-currency">₾</span>
+                        </div>
+                    </div>
+
+                    <div class="summary-item" style="border-left-color: #ff4757;">
+                        <div class="summary-label">სულ გადასახდელი</div>
+                        <div class="summary-value" style="color: #ff4757;">
+                            0.00 <span class="summary-currency">₾</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Empty State (shown when no data) -->
+                <div class="empty-state mt-5">
+                    <div class="empty-state-icon">
+                        <i class="fas fa-inbox"></i>
+                    </div>
+                    <h3 class="empty-state-title">მონაცემები არ მოიძებნა</h3>
+                    <p class="empty-state-text">აირჩიეთ ბანკი და პერიოდი ფილტრაციისთვის</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script>
+        function toggleFilter() {
+            const card = document.getElementById('filterCard');
+            const body = document.getElementById('filterBody');
+
+            card.classList.toggle('is-collapsed');
+
+            if (card.classList.contains('is-collapsed')) {
+                body.style.display = 'none';
+            } else {
+                body.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+
+</html>

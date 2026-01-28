@@ -1,0 +1,937 @@
+<!doctype html>
+<html lang="ka" data-theme="light">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>სესხის რეგისტრაცია - CGS</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="assets/css/responsive.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+        .breadcrumb-custom {
+            background: transparent;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .breadcrumb-custom li {
+            font-size: 0.85rem;
+            color: #636e72;
+        }
+
+        .breadcrumb-custom li.is-active {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        .breadcrumb-custom li+li::before {
+            content: "›";
+            color: #b2bec3;
+            padding: 0 0.5rem;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 16px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+        }
+
+        .form-section-header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.25rem 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+
+        .form-section-header:hover {
+            background: linear-gradient(135deg, #5568d3 0%, #653a8b 100%);
+        }
+
+        .form-section-header h3 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin: 0;
+            color: white;
+        }
+
+        .form-section-header i {
+            transition: transform 0.3s ease;
+        }
+
+        .form-section.is-collapsed .form-section-header i {
+            transform: rotate(180deg);
+        }
+
+        .form-section-body {
+            padding: 2rem;
+            max-height: 2000px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .form-section.is-collapsed .form-section-body {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+
+        .label {
+            font-weight: 600;
+            color: #2d3436;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .label.important::after {
+            content: " *";
+            color: #ff4757;
+        }
+
+        .input,
+        .select select,
+        .textarea {
+            border: 2px solid #e1e8ed;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .input:focus,
+        .select select:focus,
+        .textarea:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .button.is-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            border-radius: 10px;
+            padding: 0.75rem 2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .button.is-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .button.is-light {
+            border-radius: 10px;
+            border: 2px solid #e1e8ed;
+        }
+
+        .add-button,
+        .remove-button {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .add-button {
+            background: linear-gradient(135deg, #2ed573 0%, #1abc9c 100%);
+            color: white;
+        }
+
+        .add-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(46, 213, 115, 0.4);
+        }
+
+        .remove-button {
+            background: linear-gradient(135deg, #ff4757 0%, #ff6348 100%);
+            color: white;
+        }
+
+        .remove-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 71, 87, 0.4);
+        }
+
+        .page-header {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .page-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3436;
+            margin-bottom: 0.5rem;
+        }
+
+        .page-description {
+            color: #636e72;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .info-button {
+            color: #636e72;
+            cursor: help;
+            margin-left: 0.25rem;
+        }
+
+        .info-button:hover {
+            color: var(--primary-color);
+        }
+
+        .text-danger {
+            color: #ff4757;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+        }
+
+        .text-info {
+            color: #3498db;
+            font-size: 0.8rem;
+            margin-top: 0.25rem;
+            display: block;
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-wrapper input[type="checkbox"] {
+            margin-right: 0.75rem;
+            margin-top: 0.25rem;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+        }
+
+        .checkbox-wrapper label {
+            cursor: pointer;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .submit-section {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .founder-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="navbar-brand">
+            <button class="sidebar-toggle" id="toggleSidebar">
+                <i class="fas fa-bars"></i>
+            </button>
+            <a class="navbar-item" href="index.html">
+                <img src="assets/logo/logo.png" alt="CGS Logo" />
+            </a>
+            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="sidebarMain">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+        </div>
+        <div class="navbar-end">
+            <div class="navbar-item">
+                <a class="button is-light is-rounded" style="position: relative">
+                    <span class="icon"><i class="fas fa-bell"></i></span>
+                    <span class="notification-badge">3</span>
+                </a>
+            </div>
+            <div class="navbar-item has-dropdown is-hoverable">
+                <a class="navbar-link is-arrowless">
+                    <div class="user-avatar">T</div>
+                    <span class="is-hidden-touch">Tato G.</span>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    <a class="navbar-item" href="#"><i class="fas fa-user-circle"></i> პროფილი</a>
+                    <hr class="navbar-divider" />
+                    <a class="navbar-item has-text-danger" href="login.html"><i class="fas fa-sign-out-alt"></i>
+                        გასვლა</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <aside class="sidebar" id="sidebarMain">
+        <div class="sidebar-user">
+            <div class="user-avatar">T</div>
+            <div class="user-info">
+                <span class="user-name">Tato G.</span>
+                <span class="user-role">ადმინისტრატორი</span>
+            </div>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="index.html" class="sidebar-link">
+                <i class="fas fa-home"></i> <span>მთავარი</span>
+            </a>
+            <a href="loans.html" class="sidebar-link">
+                <i class="fas fa-chart-bar"></i> <span>სესხები</span>
+            </a>
+            <a href="upload.html" class="sidebar-link is-active">
+                <i class="fas fa-upload"></i> <span>ინფორმაციის ატვირთვა</span>
+            </a>
+            <div class="has-dropdown">
+                <a href="#" class="sidebar-link dropdown-trigger">
+                    <i class="fas fa-exchange-alt"></i>
+                    <span>ფინანსები</span>
+                    <span class="icon is-small is-right dropdown-icon" style="margin-left: auto;">
+                        <i class="fas fa-angle-down"></i>
+                    </span>
+                </a>
+                <div class="sidebar-dropdown">
+                    <a href="finance_guarantee.html" class="submenu-link">გარანტიის საკომისიო</a>
+                    <a href="finance_received.html" class="submenu-link">მისაღები გარანტია</a>
+                    <a href="finance_transfer.html" class="submenu-link">გადასარიცხი გარანტია</a>
+                </div>
+            </div>
+            <a href="users.html" class="sidebar-link">
+                <i class="fas fa-user"></i> <span>მომხმარებლის მართვა</span>
+            </a>
+        </nav>
+    </aside>
+
+    <main class="main-content">
+        <div class="container is-fluid">
+            <!-- Breadcrumb -->
+            <nav class="breadcrumb-custom" aria-label="breadcrumbs">
+                <ul>
+                    <li><a href="index.html">მთავარი</a></li>
+                    <li><a href="upload.html">ინფორმაციის ატვირთვა</a></li>
+                    <li class="is-active">სესხის რეგისტრაცია</li>
+                </ul>
+            </nav>
+
+            <!-- Page Header -->
+            <div class="page-header">
+                <div class="columns is-vcentered">
+                    <div class="column">
+                        <h1 class="page-title">
+                            <i class="fas fa-file-upload has-text-primary"></i>
+                            სესხის რეგისტრაციის ატვირთვა
+                        </h1>
+                        <p class="page-description">
+                            საკრედიტო საგარანტიო სქემის სახელმწიფო პროგრამის ფარგლებში ბენეფიციარისთვის, მისი მშობელი
+                            კომპანიისთვის და შვილობილი კომპანიისთვის პროგრამის ფარგლებში საქმიანობის ერთსა და იმავე
+                            განყოფილებაში დამტკიცებული სესხ(ებ)ის ჯამური მოცულობა (აღნიშნული სესხის ჩათვლით) არ
+                            აღემატება 5 მილიონ ლარს.
+                        </p>
+                    </div>
+                    <div class="column is-narrow">
+                        <div class="action-buttons">
+                            <a href="upload.html" class="button is-light">
+                                <span class="icon"><i class="fas fa-arrow-left"></i></span>
+                                <span>უკან დაბრუნება</span>
+                            </a>
+                            <a href="http://127.0.0.1:8000/instructions/addUser.docx" class="button is-warning">
+                                <span class="icon"><i class="fas fa-book"></i></span>
+                                <span>ინსტრუქცია</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Form -->
+            <form action="http://127.0.0.1:8000/bui/upload/addUser" method="post" enctype="multipart/form-data"
+                id="bui-add-user-form">
+
+                <!-- Section 1: Borrower Information -->
+                <div class="form-section">
+                    <div class="form-section-header" onclick="toggleSection(this)">
+                        <h3><i class="fas fa-user-tie"></i> მსესხებლის შესახებ ინფორმაცია</h3>
+                        <i class="fas fa-chevron-up"></i>
+                    </div>
+                    <div class="form-section-body">
+                        <div class="columns">
+                            <div class="column is-4">
+                                <div class="field">
+                                    <label class="label important">მსესხებლის ტიპი</label>
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select name="user_type" id="user-type" onchange="toggleUserType()">
+                                                <option value="">აირჩიეთ</option>
+                                                <option value="juridical">იურიდიული პირი, მათ შორის ი/მ</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Juridical Person Fields -->
+                            <div class="column is-3 juridical-fields" style="display: none;">
+                                <div class="field">
+                                    <label class="label important">ბრუნვა</label>
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select name="AGREEMENT[JURIDICAL_PERSON][TURNOVER]">
+                                                <option value="">აირჩიეთ კატეგორია</option>
+                                                <option value="3">III კატეგორია</option>
+                                                <option value="4">IV კატეგორია</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="column is-3 juridical-fields" style="display: none;">
+                                <div class="field">
+                                    <label class="label important">ვალდებულებები</label>
+                                    <div class="control">
+                                        <input type="number" step="0.01" value="0" class="input"
+                                            name="AGREEMENT[JURIDICAL_PERSON][DEBTS]" placeholder="0.00">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Juridical Person Detailed Fields -->
+                        <div class="juridical-fields" style="display: none;">
+                            <div class="columns">
+                                <div class="column is-3">
+                                    <div class="field">
+                                        <label class="label important">საიდენტიფიკაციო კოდი</label>
+                                        <div class="control">
+                                            <input type="text" class="input"
+                                                name="AGREEMENT[JURIDICAL_PERSON][TAX_CODE]" placeholder="123456789">
+                                        </div>
+                                        <span class="text-danger" id="error_code_1"></span>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label important">კომპანიის დასახელება</label>
+                                        <div class="control">
+                                            <div class="field has-addons">
+                                                <div class="control">
+                                                    <div class="select">
+                                                        <select name="AGREEMENT[JURIDICAL_PERSON][COMPANY_TYPE]">
+                                                            <option value="">აირჩიეთ</option>
+                                                            <option value="1">შპს</option>
+                                                            <option value="2">სს</option>
+                                                            <option value="3">სპს</option>
+                                                            <option value="4">კოოპერატივი</option>
+                                                            <option value="5">კს</option>
+                                                            <option value="6">ამხანაგობა</option>
+                                                            <option value="7">კავშირი</option>
+                                                            <option value="8">უცხოური საწარმო</option>
+                                                            <option value="9">ი/მ</option>
+                                                            <option value="10">სხვა</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="control is-expanded">
+                                                    <input type="text" class="input"
+                                                        name="AGREEMENT[JURIDICAL_PERSON][NAME]"
+                                                        placeholder="კომპანიის დასახელება">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-3">
+                                    <div class="field">
+                                        <label class="label important">რეგისტრაციის თარიღი</label>
+                                        <div class="control">
+                                            <input type="date" class="input"
+                                                name="AGREEMENT[JURIDICAL_PERSON][REGISTER_DATE]">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column is-3">
+                                    <div class="field">
+                                        <label class="label important">საქმიანობის განხორციელების ფაქტობრივი
+                                            რეგიონი</label>
+                                        <div class="control">
+                                            <div class="select is-fullwidth">
+                                                <select name="AGREEMENT[Regions]">
+                                                    <option value="">აირჩიეთ</option>
+                                                    <option value="26">თბილისი</option>
+                                                    <option value="28">აჭარა</option>
+                                                    <option value="29">გურია</option>
+                                                    <option value="30">იმერეთი</option>
+                                                    <option value="31">კახეთი</option>
+                                                    <option value="32">მცხეთა-მთიანეთი</option>
+                                                    <option value="33">რაჭა-ლეჩხუმი და ქვემო სვანეთი</option>
+                                                    <option value="34">სამეგრელო-ზემო სვანეთი</option>
+                                                    <option value="35">სამცხე-ჯავახეთი</option>
+                                                    <option value="36">ქვემო ქართლი</option>
+                                                    <option value="37">შიდა ქართლი</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-3">
+                                    <div class="field">
+                                        <label class="label important">საქმიანობის განხორციელების ფაქტობრივი
+                                            მუნიციპალიტეტი / ქალაქი</label>
+                                        <div class="control">
+                                            <div class="select is-fullwidth">
+                                                <select name="AGREEMENT[MUNICIPALITY]">
+                                                    <option value="">აირჩიეთ</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-3">
+                                    <div class="field">
+                                        <label class="label important">ფაქტობრივი (საქმიანობის განხორციელების)
+                                            მისამართით</label>
+                                        <div class="control">
+                                            <input type="text" class="input"
+                                                name="AGREEMENT[JURIDICAL_PERSON][ACTUAL_ADDRESS]"
+                                                placeholder="მისამართი">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-3">
+                                    <div class="field">
+                                        <label class="label important">ფაქტობრივი (საქმიანობის განხორციელების)
+                                            საკადასტრო კოდი</label>
+                                        <div class="control">
+                                            <input type="text" class="input"
+                                                name="AGREEMENT[JURIDICAL_PERSON][CAD_CODE]"
+                                                placeholder="საკადასტრო კოდი">
+                                        </div>
+                                        <span class="text-danger" id="error_code_2"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column is-3">
+                                    <div class="field">
+                                        <label class="label important">იურიდიული მისამართი</label>
+                                        <div class="control">
+                                            <input type="text" class="input"
+                                                name="AGREEMENT[JURIDICAL_PERSON][JURIDICAL_ADDRESS]"
+                                                placeholder="იურიდიული მისამართი">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-3">
+                                    <div class="field">
+                                        <label class="label">ელ-ფოსტა</label>
+                                        <div class="control">
+                                            <input type="email" class="input" name="AGREEMENT[JURIDICAL_PERSON][EMAIL]"
+                                                placeholder="email@example.com">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-3">
+                                    <div class="field">
+                                        <label class="label">კომპნიის ბრენდული სახელწოდება (არსებობის
+                                            შემთხვევაში)</label>
+                                        <div class="control">
+                                            <input type="text" class="input" name="AGREEMENT[JURIDICAL_PERSON][BRAND]"
+                                                placeholder="ბრენდი">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-3">
+                                    <div class="field">
+                                        <label class="label">კომპანიის სოციალური მედიის გვერდი (არსებობის
+                                            შემთხვევაში)</label>
+                                        <div class="control">
+                                            <input type="text" class="input" name="AGREEMENT[JURIDICAL_PERSON][SOCIAL]"
+                                                placeholder="Facebook, Instagram, etc.">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="columns">
+                                <div class="column is-4">
+                                    <div class="field">
+                                        <label class="label important">დირექტორი ქალების რაოდენობა</label>
+                                        <div class="control">
+                                            <input type="number" class="input"
+                                                name="AGREEMENT[JURIDICAL_PERSON][DIRECTOR_WOMAN_COUNT]"
+                                                placeholder="0">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-4">
+                                    <div class="field">
+                                        <label class="label important">დამფუძნებელი ქალების რაოდენობა</label>
+                                        <div class="control">
+                                            <input type="number" class="input"
+                                                name="AGREEMENT[JURIDICAL_PERSON][FOUNDER_WOMAN_COUNT]" placeholder="0">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-4">
+                                    <div class="field">
+                                        <label class="label important">
+                                            ქალების ჯამური მფლობელობის წილი %
+                                            <i class="fas fa-info-circle info-button"
+                                                title="მიუთითეთ ქალების ჯამური მფლობელობის წილი პროცენტულად"></i>
+                                        </label>
+                                        <div class="control">
+                                            <input type="number" class="input"
+                                                name="AGREEMENT[JURIDICAL_PERSON][FOUNDER_WOMAN_TOTAL_SHARE]"
+                                                placeholder="0">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 2: Green Taxonomy (Hidden by default) -->
+                <div class="form-section" style="display: none;">
+                    <div class="form-section-header" onclick="toggleSection(this)">
+                        <h3><i class="fas fa-leaf"></i> მწვანე ტაქსონომია</h3>
+                        <i class="fas fa-chevron-up"></i>
+                    </div>
+                    <div class="form-section-body">
+                        <div class="notification is-danger is-light">
+                            <strong>მნიშვნელოვანი:</strong> მოცემული 3 კატეგორიიდან აუცილებელია მონიშნოთ ერთი ან
+                            მაქსიმუმ ორი კატეგორია!
+                        </div>
+
+                        <input type="hidden" name="WORLDBANK[CATEGORY_GREEN_HIDDEN]" value="on">
+
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" name="WORLDBANK[CATEGORY_GREEN_1]" id="green_1">
+                            <label for="green_1">სებ-ის მწვანე ტაქსონომიის მიხედვით კლასიფიცირდება მწვანე სესხად</label>
+                        </div>
+
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" name="WORLDBANK[CATEGORY_GREEN_2]" id="green_2">
+                            <label for="green_2">გაიარა სებ-ის მწვანე ტაქსონომიის მიხედვით შემოწმება (სკრინინგი) და არ
+                                კვალიფიცირდება მწვანე სესხად</label>
+                        </div>
+
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" name="WORLDBANK[CATEGORY_GREEN_3]" id="green_3" checked>
+                            <label for="green_3">არ გაუვლია სებ-ის მწვანე ტაქსონომიის მიხედვით შემოწმება
+                                (სკრინინგი)</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: World Bank Risk Category (Hidden by default) -->
+                <div class="form-section" style="display: none;">
+                    <div class="form-section-header" onclick="toggleSection(this)">
+                        <h3><i class="fas fa-exclamation-triangle"></i> მსოფლიო ბანკის რისკების კატეგორია</h3>
+                        <i class="fas fa-chevron-up"></i>
+                    </div>
+                    <div class="form-section-body">
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" name="WORLDBANK[CATEGORY_1]" id="wb_cat_1">
+                            <label for="wb_cat_1">არ ეწევა პროგრამით გათვალისწინებულ აკრძალულ საქმიანობებს</label>
+                        </div>
+
+                        <div class="checkbox-wrapper">
+                            <input type="checkbox" name="WORLDBANK[CATEGORY_2]" id="wb_cat_2">
+                            <label for="wb_cat_2">ლიცენზიებისა და ნებართვების შესახებ საქართველოს კანონის შესაბამისად,
+                                საჭიროების შემთხვევაში, ფლობს საქმიანობის განხორციელების ან/და მშენებლობისთვის საჭირო
+                                ყველა ლიცენზიას და ნებართვას</label>
+                        </div>
+
+                        <div class="columns mt-4">
+                            <div class="column is-6">
+                                <div class="field">
+                                    <label class="label important">რისკების კატეგორიები</label>
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select name="WORLDBANK[RISK]">
+                                                <option value="3" selected>მცირე ან ზომიერი (Low or moderate)</option>
+                                                <option value="1">მნიშვნელოვანი (Substantial)</option>
+                                                <option value="2">მაღალი (High)</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <span class="text-info">
+                                        *მეწარმე სუბიექტის საქმიანობა არ კვალიფიცირდება მნიშვნელოვანი და მაღალი რისკის
+                                        მქონე საქმიანობებად
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="column is-6">
+                                <div class="field">
+                                    <label class="label important">მიზეზი, რატომ არ იყენებს მსოფლიო ბანკის
+                                        დაფინანსებას</label>
+                                    <div class="control">
+                                        <textarea class="textarea" name="WORLDBANK[WHYNOTWBBANK]">მიკრო სესხი</textarea>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 4: Signer Person (Juridical only) -->
+                <div class="form-section juridical-fields" style="display: none;">
+                    <div class="form-section-header" onclick="toggleSection(this)">
+                        <h3><i class="fas fa-signature"></i> ხელმომწერი პირი</h3>
+                        <i class="fas fa-chevron-up"></i>
+                    </div>
+                    <div class="form-section-body">
+                        <div class="columns">
+                            <div class="column is-3">
+                                <div class="field">
+                                    <label class="label important">სახელი</label>
+                                    <div class="control">
+                                        <input type="text" class="input"
+                                            name="AGREEMENT[JURIDICAL_PERSON][SIGNER_PERSON][NAME]"
+                                            placeholder="სახელი">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column is-3">
+                                <div class="field">
+                                    <label class="label important">გვარი</label>
+                                    <div class="control">
+                                        <input type="text" class="input"
+                                            name="AGREEMENT[JURIDICAL_PERSON][SIGNER_PERSON][SURNAME]"
+                                            placeholder="გვარი">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column is-3">
+                                <div class="field">
+                                    <label class="label important">პირადი ნომერი</label>
+                                    <div class="control">
+                                        <input type="text" class="input"
+                                            name="AGREEMENT[JURIDICAL_PERSON][SIGNER_PERSON][PERSONAL_ID]"
+                                            placeholder="01234567890">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="column is-3">
+                                <div class="field">
+                                    <label class="label important">ტელეფონი</label>
+                                    <div class="control">
+                                        <input type="text" class="input"
+                                            name="AGREEMENT[JURIDICAL_PERSON][SIGNER_PERSON][PHONE_NUMBER]"
+                                            placeholder="5XX XXX XXX">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 5: Founders (Juridical only) -->
+                <div class="form-section juridical-fields" style="display: none;">
+                    <div class="form-section-header" onclick="toggleSection(this)">
+                        <h3><i class="fas fa-users"></i> დამფუძნებელი / დამფუძნებლები</h3>
+                        <i class="fas fa-chevron-up"></i>
+                    </div>
+                    <div class="form-section-body">
+                        <div id="founders-container">
+                            <div class="founder-item">
+                                <div class="columns">
+                                    <div class="column is-4">
+                                        <div class="field">
+                                            <label class="label important">სახელ-გვარი / დასახელება</label>
+                                            <div class="control">
+                                                <input type="text" class="input"
+                                                    name="AGREEMENT[JURIDICAL_PERSON][FOUNDER_PERSON][0][NAME]"
+                                                    placeholder="სახელი გვარი">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-3">
+                                        <div class="field">
+                                            <label class="label important">პ/ნ ან ს/კ</label>
+                                            <div class="control">
+                                                <input type="text" class="input"
+                                                    name="AGREEMENT[JURIDICAL_PERSON][FOUNDER_PERSON][0][TAX_CODE]"
+                                                    placeholder="პირადი ნომერი ან ს/კ">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-3">
+                                        <div class="field">
+                                            <label class="label important">ტელეფონი</label>
+                                            <div class="control">
+                                                <input type="text" class="input"
+                                                    name="AGREEMENT[JURIDICAL_PERSON][FOUNDER_PERSON][0][PHONE_NUMBER]"
+                                                    placeholder="5XX XXX XXX">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="column is-2">
+                                        <label class="label">&nbsp;</label>
+                                        <button type="button" class="add-button" onclick="addFounder()">
+                                            <i class="fas fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 6: Loan Status -->
+                <div class="form-section">
+                    <div class="form-section-header" onclick="toggleSection(this)">
+                        <h3><i class="fas fa-info-circle"></i> სესხის სტატუსი</h3>
+                        <i class="fas fa-chevron-up"></i>
+                    </div>
+                    <div class="form-section-body">
+                        <div class="columns">
+                            <div class="column is-4">
+                                <div class="field">
+                                    <label class="label important">სესხის სტატუსი</label>
+                                    <div class="control">
+                                        <div class="select is-fullwidth">
+                                            <select name="AGREEMENT[STATUS]">
+                                                <option value="">აირჩიეთ</option>
+                                                <option value="1">ახალი</option>
+                                                <option value="5">პროგრამის ფარგლებში გაცემული სესხის რეფინანსირება
+                                                </option>
+                                                <option value="6">სესხის-ჩახურვა</option>
+                                                <option value="7">სესხი გავიდა საგარანტიო მექანიზმიდან</option>
+                                                <option value="4">ჩაიხურა რეფინანსირებით</option>
+                                                <option value="9">გადეფოლტებული</option>
+                                                <option value="10">სესხის ჩახსნა</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Submit Section -->
+                <div class="submit-section">
+                    <button type="submit" class="button is-primary is-large">
+                        <span class="icon"><i class="fas fa-check"></i></span>
+                        <span>ატვირთვა</span>
+                    </button>
+                    <button type="reset" class="button is-light is-large ml-3">
+                        <span class="icon"><i class="fas fa-times"></i></span>
+                        <span>გასუფთავება</span>
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script>
+        // Toggle section collapse
+        function toggleSection(header) {
+            const section = header.parentElement;
+            section.classList.toggle('is-collapsed');
+        }
+
+        // Toggle user type fields
+        function toggleUserType() {
+            const userType = document.getElementById('user-type').value;
+            const juridicalFields = document.querySelectorAll('.juridical-fields');
+
+            if (userType === 'juridical') {
+                juridicalFields.forEach(el => el.style.display = '');
+            } else {
+                juridicalFields.forEach(el => el.style.display = 'none');
+            }
+        }
+
+        // Add founder
+        let founderCount = 1;
+        function addFounder() {
+            const container = document.getElementById('founders-container');
+            const newFounder = document.createElement('div');
+            newFounder.className = 'founder-item';
+            newFounder.innerHTML = `
+                <div class="columns">
+                    <div class="column is-4">
+                        <div class="field">
+                            <label class="label important">სახელ-გვარი / დასახელება</label>
+                            <div class="control">
+                                <input type="text" class="input" name="AGREEMENT[JURIDICAL_PERSON][FOUNDER_PERSON][${founderCount}][NAME]" placeholder="სახელი გვარი">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="field">
+                            <label class="label important">პ/ნ ან ს/კ</label>
+                            <div class="control">
+                                <input type="text" class="input" name="AGREEMENT[JURIDICAL_PERSON][FOUNDER_PERSON][${founderCount}][TAX_CODE]" placeholder="პირადი ნომერი ან ს/კ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-3">
+                        <div class="field">
+                            <label class="label important">ტელეფონი</label>
+                            <div class="control">
+                                <input type="text" class="input" name="AGREEMENT[JURIDICAL_PERSON][FOUNDER_PERSON][${founderCount}][PHONE_NUMBER]" placeholder="5XX XXX XXX">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column is-2">
+                        <label class="label">&nbsp;</label>
+                        <button type="button" class="remove-button" onclick="this.closest('.founder-item').remove()">
+                            <i class="fas fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+            container.appendChild(newFounder);
+            founderCount++;
+        }
+
+        // Form submission confirmation
+        document.getElementById('bui-add-user-form').addEventListener('submit', function (e) {
+            if (!confirm('დარწმუნებული ხართ, რომ გსურთ ატვირთვა?')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+
+</html>
