@@ -158,4 +158,15 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
+
+    // Filter card collapse toggle
+    const filterCards = document.querySelectorAll('.filter-card');
+    filterCards.forEach(card => {
+        const collapseBtn = card.querySelector('.collapse-icon');
+        if (collapseBtn) {
+            collapseBtn.addEventListener('click', () => {
+                card.classList.toggle('is-collapsed');
+            });
+        }
+    });
 });
