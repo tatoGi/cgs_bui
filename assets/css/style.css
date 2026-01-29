@@ -708,19 +708,7 @@ body.sidebar-collapsed .main-content {
     animation: slideDown 0.3s ease-out;
 }
 
-@media screen and (max-width: 1023px) {
-    .sidebar {
-        transform: translateX(-100%);
-    }
-
-    .main-content {
-        margin-left: 0;
-    }
-
-    body.is-sidebar-active .sidebar {
-        transform: translateX(0);
-    }
-}
+/* Sidebar & main content responsive handled in responsive.css */
 
 /* Modal Premium Styles */
 .modal {

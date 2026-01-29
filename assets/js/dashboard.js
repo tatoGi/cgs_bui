@@ -76,15 +76,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const sidebar = document.getElementById('sidebarMain');
     const body = document.body;
 
-    function openSidebar() {
-        if (window.innerWidth <= 1024) {
-            body.classList.add('sidebar-open');
-            sidebar.classList.add('is-active');
-        } else {
-            body.classList.toggle('sidebar-collapsed');
-        }
-    }
-
     function closeSidebar() {
         body.classList.remove('sidebar-open');
         sidebar.classList.remove('is-active');
@@ -94,13 +85,16 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function toggleSidebar() {
-        if (window.innerWidth <= 1024) {
+        if (window.innerWidth < 1024) {
+            // Mobile/tablet: slide-in overlay
             if (body.classList.contains('sidebar-open')) {
                 closeSidebar();
             } else {
-                openSidebar();
+                body.classList.add('sidebar-open');
+                sidebar.classList.add('is-active');
             }
         } else {
+            // Desktop: collapse sidebar
             body.classList.toggle('sidebar-collapsed');
         }
     }
@@ -119,9 +113,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // Close sidebar when clicking overlay
     overlay.addEventListener('click', closeSidebar);
 
-    // Close sidebar on window resize to desktop
+    // Close sidebar overlay on window resize to desktop
     window.addEventListener('resize', () => {
-        if (window.innerWidth > 1024) {
+        if (window.innerWidth >= 1024) {
             closeSidebar();
         }
     });
