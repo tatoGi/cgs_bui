@@ -281,7 +281,7 @@
                         </div>
                     </div>
                     <div class="level-right">
-                        <button class="button is-primary is-rounded">
+                        <button class="button is-primary is-rounded" id="openNewUserModal">
                             <span class="icon"><i class="fas fa-user-plus"></i></span>
                             <span>ახალი მომხმარებელი</span>
                         </button>
@@ -579,6 +579,206 @@
         </div>
     </main>
 
+    <!-- New User Modal -->
+    <div class="modal" id="newUserModal">
+        <div class="modal-background"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">
+                    <i class="fas fa-user-plus has-text-primary mr-2"></i>
+                    ახალი მომხმარებელი
+                </p>
+                <button class="delete" aria-label="close" id="closeNewUserModal"></button>
+            </header>
+            <section class="modal-card-body">
+                <form id="newUserForm">
+                    <!-- Personal Info -->
+                    <div class="modal-section-card mb-5">
+                        <div class="info-grid-title" onclick="this.closest('.modal-section-card').classList.toggle('is-collapsed')">
+                            <i class="fas fa-user"></i>
+                            პირადი ინფორმაცია
+                            <span class="collapse-chevron ml-auto"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="card-content-wrapper">
+                            <div class="columns is-multiline">
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label">სახელი</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="text" placeholder="მაგ: თათო" name="first_name" required>
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label">გვარი</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="text" placeholder="მაგ: გელაშვილი" name="last_name" required>
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label">პირადი ნომერი</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="text" placeholder="მაგ: 01024002933" name="personal_id" required>
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-id-card"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label">ტელეფონი</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="tel" placeholder="მაგ: +995 555 123 456" name="phone">
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-phone"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Account Info -->
+                    <div class="modal-section-card mb-5">
+                        <div class="info-grid-title" onclick="this.closest('.modal-section-card').classList.toggle('is-collapsed')">
+                            <i class="fas fa-shield-alt"></i>
+                            ანგარიშის ინფორმაცია
+                            <span class="collapse-chevron ml-auto"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="card-content-wrapper">
+                            <div class="columns is-multiline">
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label">ელ-ფოსტა</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="email" placeholder="მაგ: user@cgs.ge" name="email" required>
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-envelope"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label">როლი</label>
+                                        <div class="control has-icons-left">
+                                            <div class="select is-fullwidth">
+                                                <select name="role" required>
+                                                    <option value="">აირჩიეთ როლი</option>
+                                                    <option value="admin">ადმინისტრატორი</option>
+                                                    <option value="manager">მენეჯერი</option>
+                                                    <option value="analyst">ანალიტიკოსი</option>
+                                                    <option value="operator">ოპერატორი</option>
+                                                </select>
+                                            </div>
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-user-tag"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label">პაროლი</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="password" placeholder="მინ. 8 სიმბოლო" name="password" required>
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-lock"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="column is-6">
+                                    <div class="field">
+                                        <label class="label">პაროლის დადასტურება</label>
+                                        <div class="control has-icons-left">
+                                            <input class="input" type="password" placeholder="გაიმეორეთ პაროლი" name="password_confirm" required>
+                                            <span class="icon is-small is-left">
+                                                <i class="fas fa-lock"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Permissions -->
+                    <div class="modal-section-card">
+                        <div class="info-grid-title" onclick="this.closest('.modal-section-card').classList.toggle('is-collapsed')">
+                            <i class="fas fa-key"></i>
+                            უფლებები
+                            <span class="collapse-chevron ml-auto"><i class="fas fa-chevron-down"></i></span>
+                        </div>
+                        <div class="card-content-wrapper">
+                            <div class="columns is-multiline">
+                                <div class="column is-6">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="perm_loans" checked>
+                                        სესხების ნახვა
+                                    </label>
+                                </div>
+                                <div class="column is-6">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="perm_upload">
+                                        ინფორმაციის ატვირთვა
+                                    </label>
+                                </div>
+                                <div class="column is-6">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="perm_finance">
+                                        ფინანსები
+                                    </label>
+                                </div>
+                                <div class="column is-6">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="perm_users">
+                                        მომხმარებლების მართვა
+                                    </label>
+                                </div>
+                                <div class="column is-6">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="perm_export">
+                                        ექსპორტი
+                                    </label>
+                                </div>
+                                <div class="column is-6">
+                                    <label class="checkbox">
+                                        <input type="checkbox" name="perm_reports">
+                                        რეპორტები
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </section>
+            <footer class="modal-card-foot">
+                <div class="modal-footer-actions" style="width: 100%; display: flex; justify-content: flex-end; gap: 10px;">
+                    <button class="button is-light is-rounded" id="cancelNewUserModal">
+                        <span class="icon"><i class="fas fa-times"></i></span>
+                        <span>გაუქმება</span>
+                    </button>
+                    <button class="button is-primary is-rounded" id="submitNewUser">
+                        <span class="icon"><i class="fas fa-check"></i></span>
+                        <span>შექმნა</span>
+                    </button>
+                </div>
+            </footer>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="assets/js/dashboard.js"></script>
     <script>
@@ -588,6 +788,47 @@
                 document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('is-active'));
                 this.classList.add('is-active');
             });
+        });
+
+        // New User Modal
+        const modal = document.getElementById('newUserModal');
+        const openBtn = document.getElementById('openNewUserModal');
+        const closeBtn = document.getElementById('closeNewUserModal');
+        const cancelBtn = document.getElementById('cancelNewUserModal');
+        const modalBg = modal.querySelector('.modal-background');
+
+        function openModal() {
+            modal.classList.add('is-active');
+            document.documentElement.classList.add('is-clipped');
+        }
+
+        function closeModal() {
+            modal.classList.remove('is-active');
+            document.documentElement.classList.remove('is-clipped');
+        }
+
+        openBtn.addEventListener('click', openModal);
+        closeBtn.addEventListener('click', closeModal);
+        cancelBtn.addEventListener('click', closeModal);
+        modalBg.addEventListener('click', closeModal);
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+                closeModal();
+            }
+        });
+
+        // Submit handler
+        document.getElementById('submitNewUser').addEventListener('click', () => {
+            const form = document.getElementById('newUserForm');
+            if (form.checkValidity()) {
+                // Form is valid - would submit to server here
+                closeModal();
+                form.reset();
+            } else {
+                form.reportValidity();
+            }
         });
     </script>
 </body>
