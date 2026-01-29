@@ -65,17 +65,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Mobile Sidebar Toggle
+    // Create sidebar overlay element
+    const overlay = document.createElement('div');
+    overlay.className = 'sidebar-overlay';
+    document.body.appendChild(overlay);
+
+    // Sidebar Toggle
     const sidebarToggle = document.getElementById('toggleSidebar');
     const burger = document.querySelector('.navbar-burger');
     const sidebar = document.getElementById('sidebarMain');
     const body = document.body;
 
+    function openSidebar() {
+        if (window.innerWidth <= 1024) {
+            body.classList.add('sidebar-open');
+            sidebar.classList.add('is-active');
+        } else {
+            body.classList.toggle('sidebar-collapsed');
+        }
+    }
+
+    function closeSidebar() {
+        body.classList.remove('sidebar-open');
+        sidebar.classList.remove('is-active');
+        if (burger) {
+            burger.classList.remove('is-active');
+        }
+    }
+
     function toggleSidebar() {
-        sidebar.classList.toggle('is-active');
-        body.classList.toggle('is-sidebar-active');
-        if (window.innerWidth < 1024) {
-            // Mobile behavior
+        if (window.innerWidth <= 1024) {
+            if (body.classList.contains('sidebar-open')) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
         } else {
             body.classList.toggle('sidebar-collapsed');
         }
@@ -87,10 +111,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (burger) {
         burger.addEventListener('click', () => {
-            sidebar.classList.toggle('is-active');
+            toggleSidebar();
             burger.classList.toggle('is-active');
         });
     }
+
+    // Close sidebar when clicking overlay
+    overlay.addEventListener('click', closeSidebar);
+
+    // Close sidebar on window resize to desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 1024) {
+            closeSidebar();
+        }
+    });
 
     // Dropdowns in sidebar
     const dropdowns = document.querySelectorAll('.has-dropdown');
