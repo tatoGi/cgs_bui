@@ -44,15 +44,30 @@ body.sidebar-open .sidebar-overlay {
         padding: 120px 1.25rem 1.5rem 1.25rem;
     }
 
-    /* Dashboard 3-column layout: switch to 2+1 on laptops */
-    .columns.is-desktop > .column.is-4-desktop {
-        flex: none;
-        width: 50%;
+    /* Dashboard 3-column layout: switch to 2+1 on laptops
+       Bulma is-variable is-4 uses --bulma-column-gap for padding.
+       Force wrap so col1+col2 = row1, col3 = row2. */
+    .columns.is-variable.is-desktop {
+        flex-wrap: wrap !important;
+        display: flex !important;
+    }
+
+    .columns.is-variable.is-desktop > .column.is-4-desktop {
+        flex: none !important;
+        width: 50% !important;
+        max-width: 50% !important;
     }
 
     /* Third column (charts) goes full width below */
-    .columns.is-desktop > .column.is-4-desktop:nth-child(3) {
-        width: 100%;
+    .columns.is-variable.is-desktop > .column.is-4-desktop:nth-child(3) {
+        width: 100% !important;
+        max-width: 100% !important;
+    }
+
+    /* Ensure dashboard cards don't overflow their column */
+    .dashboard-card {
+        overflow: hidden;
+        word-wrap: break-word;
     }
 
     /* Dashboard cards compact */
