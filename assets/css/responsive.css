@@ -107,6 +107,15 @@ body.sidebar-open .sidebar-overlay {
         margin-bottom: 0.5rem;
     }
 
+    /* Upload actions row on laptop */
+    .upload-actions-row .quick-action-item {
+        min-width: 85px;
+    }
+
+    .upload-actions-row .quick-action-item span {
+        font-size: 0.75rem;
+    }
+
     /* Charts fit in less height */
     .chart-container {
         height: 250px;
@@ -292,6 +301,16 @@ body.sidebar-open .sidebar-overlay {
     .quick-actions-grid {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    /* Upload actions row wraps on tablet */
+    .upload-actions-row {
+        flex-wrap: wrap;
+    }
+
+    .upload-actions-row .quick-action-item {
+        min-width: 120px;
+        flex: 1 1 auto;
+    }
 }
 
 /* ============================================
@@ -390,6 +409,17 @@ body.sidebar-open .sidebar-overlay {
 
     .quick-action-item span {
         font-size: 0.8rem;
+    }
+
+    /* Upload actions row on mobile: grid wrap */
+    .upload-actions-row {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0.5rem;
+    }
+
+    .upload-actions-row .quick-action-item {
+        min-width: unset;
     }
 
     .quick-action-item .icon-box {
@@ -893,6 +923,11 @@ body.sidebar-open .sidebar-overlay {
     /* Quick actions: single column */
     .quick-actions-grid {
         grid-template-columns: 1fr;
+    }
+
+    /* Upload actions: 2 columns on very small */
+    .upload-actions-row {
+        grid-template-columns: repeat(2, 1fr);
     }
 
     /* Upload cards: single column */

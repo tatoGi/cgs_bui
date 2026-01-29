@@ -236,105 +236,6 @@
               </form>
             </div>
 
-            <!-- Upload Information List -->
-            <div class="dashboard-card">
-              <div class="dashboard-card-header">
-                <div class="dashboard-card-title">
-                  <i class="fas fa-upload"></i> ინფორმაციის ატვირთვა
-                </div>
-              </div>
-              <div class="quick-actions-wrapper">
-                <!-- Registration & Creation -->
-                <div>
-                  <div class="action-category-title">რეგისტრაცია</div>
-                  <div class="quick-actions-grid">
-                    <a
-                      href="loan_registration.html"
-                      class="quick-action-item action-type-new"
-                    >
-                      <div class="icon-box">
-                        <i class="fas fa-user-plus"></i>
-                      </div>
-                      <span>სესხის<br />რეგისტრაცია</span>
-                    </a>
-                    <a
-                      href="micro_loan.html"
-                      class="quick-action-item action-type-new"
-                    >
-                      <div class="icon-box"><i class="fas fa-store"></i></div>
-                      <span>მიკრო<br />სესხი</span>
-                    </a>
-                  </div>
-                </div>
-
-                <!-- Management -->
-                <div>
-                  <div class="action-category-title">მართვა & ფინანსები</div>
-                  <div class="quick-actions-grid">
-                    <a href="#" class="quick-action-item action-type-edit">
-                      <div class="icon-box"><i class="fas fa-edit"></i></div>
-                      <span>სესხის<br />ცვლილება</span>
-                    </a>
-                    <a href="#" class="quick-action-item action-type-money">
-                      <div class="icon-box">
-                        <i class="fas fa-calendar-alt"></i>
-                      </div>
-                      <span>გრაფიკი</span>
-                    </a>
-                    <a href="#" class="quick-action-item action-type-money">
-                      <div class="icon-box">
-                        <i class="fas fa-money-bill-wave"></i>
-                      </div>
-                      <span>დაფარვა</span>
-                    </a>
-                    <a href="#" class="quick-action-item action-type-edit">
-                      <div class="icon-box">
-                        <i class="fas fa-file-invoice"></i>
-                      </div>
-                      <span>ამონაწერი</span>
-                    </a>
-                    <a href="#" class="quick-action-item action-type-money">
-                      <div class="icon-box">
-                        <i class="fas fa-percentage"></i>
-                      </div>
-                      <span>პროცენტის<br />შემცირება</span>
-                    </a>
-                  </div>
-                </div>
-
-                <!-- Collateral -->
-                <div>
-                  <div class="action-category-title">უზრუნველყოფა</div>
-                  <div class="quick-actions-grid">
-                    <a href="#" class="quick-action-item action-type-edit">
-                      <div class="icon-box"><i class="fas fa-sync"></i></div>
-                      <span>უზრუნვ.<br />ცვლილება</span>
-                    </a>
-                    <a href="#" class="quick-action-item action-type-money">
-                      <div class="icon-box">
-                        <i class="fas fa-university"></i>
-                      </div>
-                      <span>უზრუნვ.<br />გაყიდვა</span>
-                    </a>
-                  </div>
-                </div>
-
-                <!-- Critical Actions -->
-                <div>
-                  <div class="action-category-title">კრიტიკული</div>
-                  <div class="quick-actions-grid">
-                    <a href="#" class="quick-action-item action-type-danger">
-                      <div class="icon-box"><i class="fas fa-ban"></i></div>
-                      <span>სესხის<br />გაუქმება</span>
-                    </a>
-                    <a href="#" class="quick-action-item action-type-danger">
-                      <div class="icon-box"><i class="fas fa-gavel"></i></div>
-                      <span>სესხის<br />გადეფოლტება</span>
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           <!-- COLUMN 2: Liabilities & Funds -->
@@ -429,6 +330,61 @@
                 <canvas id="portfolioChart"></canvas>
               </div>
             </div>
+          </div>
+        </div>
+
+        <!-- Upload Information - Full Width Row -->
+        <div class="dashboard-card mt-5 upload-actions-card">
+          <div class="dashboard-card-header">
+            <div class="dashboard-card-title">
+              <i class="fas fa-upload"></i> ინფორმაციის ატვირთვა
+            </div>
+          </div>
+          <div class="upload-actions-row">
+            <a href="loan_registration.html" class="quick-action-item action-type-new">
+              <div class="icon-box"><i class="fas fa-user-plus"></i></div>
+              <span>სესხის რეგისტრაცია</span>
+            </a>
+            <a href="micro_loan.html" class="quick-action-item action-type-new">
+              <div class="icon-box"><i class="fas fa-store"></i></div>
+              <span>მიკრო სესხი</span>
+            </a>
+            <a href="#" class="quick-action-item action-type-edit">
+              <div class="icon-box"><i class="fas fa-edit"></i></div>
+              <span>სესხის ცვლილება</span>
+            </a>
+            <a href="#" class="quick-action-item action-type-money">
+              <div class="icon-box"><i class="fas fa-calendar-alt"></i></div>
+              <span>გრაფიკი</span>
+            </a>
+            <a href="#" class="quick-action-item action-type-money">
+              <div class="icon-box"><i class="fas fa-money-bill-wave"></i></div>
+              <span>დაფარვა</span>
+            </a>
+            <a href="#" class="quick-action-item action-type-edit">
+              <div class="icon-box"><i class="fas fa-file-invoice"></i></div>
+              <span>ამონაწერი</span>
+            </a>
+            <a href="#" class="quick-action-item action-type-money">
+              <div class="icon-box"><i class="fas fa-percentage"></i></div>
+              <span>პროცენტის შემცირება</span>
+            </a>
+            <a href="#" class="quick-action-item action-type-edit">
+              <div class="icon-box"><i class="fas fa-sync"></i></div>
+              <span>უზრუნვ. ცვლილება</span>
+            </a>
+            <a href="#" class="quick-action-item action-type-money">
+              <div class="icon-box"><i class="fas fa-university"></i></div>
+              <span>უზრუნვ. გაყიდვა</span>
+            </a>
+            <a href="#" class="quick-action-item action-type-danger">
+              <div class="icon-box"><i class="fas fa-ban"></i></div>
+              <span>სესხის გაუქმება</span>
+            </a>
+            <a href="#" class="quick-action-item action-type-danger">
+              <div class="icon-box"><i class="fas fa-gavel"></i></div>
+              <span>სესხის გადეფოლტება</span>
+            </a>
           </div>
         </div>
       </div>
