@@ -186,7 +186,7 @@ body.sidebar-open .sidebar-overlay {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     }
 
-    /* Filter card */
+    /* Filter card - loans page */
     .filter-card {
         padding: 1rem;
     }
@@ -195,6 +195,57 @@ body.sidebar-open .sidebar-overlay {
     .filter-card .select select {
         height: 2.25rem !important;
         font-size: 0.75rem !important;
+    }
+
+    .filter-card .label {
+        font-size: 0.75rem !important;
+    }
+
+    .filter-section-label {
+        font-size: 0.65rem;
+    }
+
+    /* Filter columns: keep 4 per row but tighter */
+    .filter-card .columns .column.is-3 {
+        padding: 0.5rem;
+    }
+
+    .filter-card .columns .column.is-4 {
+        padding: 0.5rem;
+    }
+
+    /* Date type selector compact */
+    .date-type-selector label.radio {
+        padding: 6px 12px;
+        font-size: 0.8rem;
+    }
+
+    /* Dropdown button compact */
+    .filter-card .dropdown .button {
+        font-size: 0.8rem;
+        height: 2.25rem;
+    }
+
+    /* Table header compact */
+    .table-header {
+        margin-bottom: 1rem;
+    }
+
+    .table-title {
+        font-size: 0.95rem;
+    }
+
+    /* Status tags compact */
+    .status-tag {
+        font-size: 0.7rem;
+        padding: 3px 10px;
+    }
+
+    /* Pagination compact */
+    .pagination-link,
+    .pagination-next,
+    .pagination-previous {
+        font-size: 0.8rem !important;
     }
 
     /* Summary grid */
@@ -263,12 +314,49 @@ body.sidebar-open .sidebar-overlay {
         width: 50% !important;
     }
 
-    /* Table font size */
+    /* Table section */
     .table-container-card {
         padding: 1rem;
     }
 
     .custom-table {
+        font-size: 0.8rem;
+    }
+
+    /* Table needs horizontal scroll on tablet */
+    .custom-table {
+        min-width: 700px;
+    }
+
+    /* Filter action buttons */
+    .filter-card .level {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .filter-card .level .level-left,
+    .filter-card .level .level-right {
+        width: 100%;
+    }
+
+    .filter-card .level .buttons {
+        width: 100%;
+        display: flex;
+    }
+
+    .filter-card .level .buttons .button {
+        flex: 1;
+    }
+
+    /* Date type selector full width on tablet */
+    .date-type-selector {
+        width: 100%;
+    }
+
+    .date-type-selector label.radio {
+        flex: 1;
+        text-align: center;
+        padding: 6px 10px;
         font-size: 0.8rem;
     }
 
