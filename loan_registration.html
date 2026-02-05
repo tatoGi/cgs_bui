@@ -260,6 +260,244 @@
         margin-bottom: 1rem;
         border-left: 4px solid var(--primary-color);
       }
+
+      .container-fluid {
+        width: 100%;
+      }
+
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: -0.75rem;
+        margin-right: -0.75rem;
+      }
+
+      .col,
+      .col-2,
+      .col-3,
+      .col-4,
+      .col-6,
+      .col-8,
+      .col-12,
+      .col-auto {
+        padding: 0.75rem;
+      }
+
+      .col {
+        flex: 1 1 0;
+      }
+
+      .col-auto {
+        flex: 0 0 auto;
+        width: auto;
+      }
+
+      .col-2 {
+        flex: 0 0 16.6667%;
+        max-width: 16.6667%;
+      }
+
+      .col-3 {
+        flex: 0 0 25%;
+        max-width: 25%;
+      }
+
+      .col-4 {
+        flex: 0 0 33.3333%;
+        max-width: 33.3333%;
+      }
+
+      .col-6 {
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+
+      .col-8 {
+        flex: 0 0 66.6667%;
+        max-width: 66.6667%;
+      }
+
+      .col-12 {
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
+
+      .text-right {
+        text-align: right;
+      }
+
+      .mb-0 {
+        margin-bottom: 0;
+      }
+
+      .mb-3 {
+        margin-bottom: 1rem;
+      }
+
+      .mb-4 {
+        margin-bottom: 1.5rem;
+      }
+
+      .mt-2 {
+        margin-top: 0.5rem;
+      }
+
+      .mt-3 {
+        margin-top: 1rem;
+      }
+
+      .mt-4 {
+        margin-top: 1.5rem;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        overflow: hidden;
+        margin-bottom: 1.5rem;
+      }
+
+      .card-header {
+        padding: 1rem 1.25rem;
+        border-bottom: 1px solid #f1f3f5;
+        font-weight: 600;
+      }
+
+      .card-header.bg-white {
+        background: #fff;
+      }
+
+      .card-body {
+        padding: 1.5rem;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .form-control {
+        width: 100%;
+        border: 2px solid #e1e8ed;
+        border-radius: 10px;
+        padding: 0.6rem 0.75rem;
+        font-size: 0.9rem;
+        transition: all 0.2s;
+      }
+
+      .form-control:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        border-radius: 10px;
+        padding: 0.55rem 1.1rem;
+        font-weight: 600;
+        border: 1px solid transparent;
+        cursor: pointer;
+        text-decoration: none;
+      }
+
+      .btn-link {
+        background: transparent;
+        color: #636e72;
+      }
+
+      .btn-link:hover {
+        color: var(--primary-color);
+      }
+
+      .btn-primary {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: #fff;
+      }
+
+      .btn-success {
+        background: linear-gradient(135deg, #2ed573 0%, #1abc9c 100%);
+        color: #fff;
+      }
+
+      .btn-warning {
+        background: #ffdd57;
+        color: #4a4a4a;
+      }
+
+      .btn-default {
+        background: #f1f3f5;
+        color: #2d3436;
+      }
+
+      .input-group {
+        display: flex;
+        align-items: stretch;
+      }
+
+      .input-group-prepend,
+      .input-group-append {
+        display: flex;
+      }
+
+      .input-group-text {
+        display: flex;
+        align-items: center;
+        padding: 0 0.75rem;
+        background: #f1f3f5;
+        border: 2px solid #e1e8ed;
+        border-left: 0;
+        border-radius: 0 10px 10px 0;
+      }
+
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .table th,
+      .table td {
+        border: 1px solid #e1e8ed;
+        padding: 0.75rem;
+        font-size: 0.85rem;
+      }
+
+      .table thead th {
+        background: #f8f9fa;
+      }
+
+      .d-none {
+        display: none;
+      }
+
+      .d-block {
+        display: block;
+      }
+
+      .pl-0 {
+        padding-left: 0;
+      }
+
+      .co-borrower-modal .modal-card {
+        width: min(1320px, 96vw);
+      }
+
+      @media (max-width: 1024px) {
+        .co-borrower-modal .modal-card {
+          width: min(1080px, 96vw);
+        }
+      }
+
+      @media (max-width: 768px) {
+        .co-borrower-modal .modal-card {
+          width: 100%;
+          margin: 0 0.5rem;
+        }
+      }
     </style>
   </head>
 
@@ -738,7 +976,7 @@
           </div>
 
           <!-- Section 2: Green Taxonomy (Hidden by default) -->
-          <div class="form-section" style="display: none">
+          <div class="form-section">
             <div class="form-section-header" onclick="toggleSection(this)">
               <h3><i class="fas fa-leaf"></i> მწვანე ტაქსონომია</h3>
               <i class="fas fa-chevron-up"></i>
@@ -795,7 +1033,7 @@
           </div>
 
           <!-- Section 3: World Bank Risk Category (Hidden by default) -->
-          <div class="form-section" style="display: none">
+          <div class="form-section">
             <div class="form-section-header" onclick="toggleSection(this)">
               <h3>
                 <i class="fas fa-exclamation-triangle"></i> მსოფლიო ბანკის
@@ -852,17 +1090,46 @@
                   </div>
                 </div>
                 <div class="column is-6">
-                  <div class="field">
-                    <label class="label important"
-                      >მიზეზი, რატომ არ იყენებს მსოფლიო ბანკის
-                      დაფინანსებას</label
+                  <div class="col-6" id="world_bank_hidden_for_category_2_div">
+                    <input
+                      onclick="changeCategoryWorldRadio(this.value)"
+                      type="radio"
+                      id="world_bank_hidden_for_category_2"
+                      name="WORLDBANK[WB_CATEGORY]"
+                      value="2"
+                    />
+                    <label for="world_bank_hidden_for_category_2"></label>
+                    <label for="world_bank_hidden_for_category_2"
+                      >სახელმწიფო სუბსიდირების მექანიზმი</label
                     >
-                    <div class="control">
-                      <textarea class="textarea" name="WORLDBANK[WHYNOTWBBANK]">
-მიკრო სესხი</textarea
-                      >
-                    </div>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-header bg-white">
+              <div class="row">
+                <div class="col">თანამსესხებლები</div>
+
+                <div class="col text-right col-auto">
+                  <i class="fas fa-chevron-up"></i>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="co-borrower-list col"></div>
+
+                <div class="col-2 text-right">
+                  <button
+                    type="button"
+                    class="btn btn-primary add-co-borrower-button"
+                    id="open-co-borrower-modal"
+                  >
+                    დამატება
+                  </button>
                 </div>
               </div>
             </div>
@@ -1046,6 +1313,544 @@
             </button>
           </div>
         </form>
+
+        <div
+          class="modal co-borrower-modal"
+          id="bui-upload-adduser-co-borrower-modal"
+        >
+          <div class="modal-background"></div>
+          <div class="modal-card">
+            <form
+              action="#"
+              method="get"
+              class="modal-content"
+              id="bui-upload-adduser-co-borrower"
+            >
+              <header class="modal-card-head">
+                <p class="modal-card-title">
+                  თანამსესხებლის დამატება / რედაქტირება
+                </p>
+                <button
+                  type="button"
+                  class="delete"
+                  aria-label="close"
+                  data-modal-close
+                ></button>
+              </header>
+              <section class="modal-card-body">
+                <div class="row">
+                  <div class="col-3">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-user-type"
+                        class="important"
+                        >მსესხებლის ტიპი</label
+                      >
+                      <select
+                        class="form-control"
+                        id="bui-co-borrower-modal-user-type"
+                        name="user_type"
+                        data-parent-showing="user_type_co"
+                      >
+                        <option value="">აირჩიეთ</option>
+                        <option value="physical">ფიზიკური პირი</option>
+                        <option value="juridical">იურიდიული პირი (+ი/მ)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-2"
+                    data-child-showing="user_type_co"
+                    data-parent-showing-value="juridical"
+                    style="display: none"
+                  >
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-juridical-turnover"
+                        class="important"
+                        >ბრუნვა</label
+                      >
+                      <select
+                        class="form-control"
+                        id="bui-co-borrower-modal-juridical-turnover"
+                        name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][TURNOVER]"
+                      >
+                        <option value="">აირჩიეთ კატეგორია</option>
+                        <option value="3">III კატეგორია</option>
+                        <option value="4">IV კატეგორია</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div
+                    class="col-2"
+                    data-child-showing="user_type_co"
+                    data-parent-showing-value="juridical"
+                    style="display: none"
+                  >
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-juridical-debts"
+                        class="important"
+                        >ვალდებულებები</label
+                      >
+                      <input
+                        type="number"
+                        step="0.01"
+                        class="form-control"
+                        id="bui-co-borrower-modal-juridical-debts"
+                        name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][DEBTS]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="row"
+                  data-child-showing="user_type_co"
+                  data-parent-showing-value="physical"
+                  style="display: none"
+                >
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-individual-personal-id"
+                        class="important"
+                        >პირადი ნომერი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-individual-personal-id"
+                        name="AGREEMENT[CO_BORROWERS][_index_][INDIVIDUAL_PERSON][PERSONAL_ID]"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-individual-name"
+                        class="important"
+                        >სახელი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-individual-name"
+                        name="AGREEMENT[CO_BORROWERS][_index_][INDIVIDUAL_PERSON][NAME]"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-individual-surname"
+                        class="important"
+                        >გვარი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-individual-surname"
+                        name="AGREEMENT[CO_BORROWERS][_index_][INDIVIDUAL_PERSON][SURNAME]"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-individual-birth-date"
+                        class="important"
+                        >დაბადების თარიღი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control date-range-picker-time only-date dropdowns"
+                        id="bui-co-borrower-modal-individual-birth-date"
+                        name="AGREEMENT[CO_BORROWERS][_index_][INDIVIDUAL_PERSON][BIRTH_DATE]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="row"
+                  data-child-showing="user_type_co"
+                  data-parent-showing-value="physical"
+                  style="display: none"
+                >
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-individual-phone"
+                        class="important"
+                        >ტელეფონი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-individual-phone"
+                        name="AGREEMENT[CO_BORROWERS][_index_][INDIVIDUAL_PERSON][PHONE_NUMBER]"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="bui-co-borrower-modal-individual-email"
+                        >ელ-ფოსტა</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-individual-email"
+                        name="AGREEMENT[CO_BORROWERS][_index_][INDIVIDUAL_PERSON][EMAIL]"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-individual-actual-address"
+                        class="important"
+                        >ფაქტობრივი (საქმიანობის განხორციელების)
+                        მისამართი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-individual-actual-address"
+                        name="AGREEMENT[CO_BORROWERS][_index_][INDIVIDUAL_PERSON][ACTUAL_ADDRESS]"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-individual-juridical-address"
+                        class="important"
+                        >იურიდიული მისამართი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-individual-juridical-address"
+                        name="AGREEMENT[CO_BORROWERS][_index_][INDIVIDUAL_PERSON][JURIDICAL_ADDRESS]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="row"
+                  data-child-showing="user_type_co"
+                  data-parent-showing-value="juridical"
+                  style="display: none"
+                >
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-juridical-tax-code"
+                        class="important"
+                        >საიდენტიფიკაციო კოდი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-juridical-tax-code"
+                        name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][TAX_CODE]"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-juridical-name"
+                        class="important"
+                        >კომპანიის დასახელება</label
+                      >
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <select
+                            class="form-control chosen-select"
+                            id="bui-co-borrower-modal-juridical-company-type"
+                            name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][COMPANY_TYPE]"
+                            style="display: none"
+                          >
+                            <option value="">აირჩიეთ</option>
+                            <option value="1">შპს</option>
+                            <option value="2">სს</option>
+                            <option value="3">სპს</option>
+                            <option value="4">კოოპერატივი</option>
+                            <option value="5">კს</option>
+                            <option value="6">ამხანაგობა</option>
+                            <option value="7">კავშირი</option>
+                            <option value="8">უცხოური საწარმო</option>
+                            <option value="9">ი/მ</option>
+                            <option value="10">სხვა</option>
+                          </select>
+                          <div
+                            class="chosen-container chosen-container-single"
+                            title=""
+                            id="bui_co_borrower_modal_juridical_company_type_chosen"
+                            style="width: 0px"
+                          >
+                            <a class="chosen-single chosen-default">
+                              <span>აირჩიეთ</span>
+                              <div><b></b></div>
+                            </a>
+                            <div class="chosen-drop">
+                              <div class="chosen-search">
+                                <input
+                                  class="chosen-search-input"
+                                  type="text"
+                                  autocomplete="off"
+                                />
+                              </div>
+                              <ul class="chosen-results"></ul>
+                            </div>
+                          </div>
+                        </div>
+                        <input
+                          type="text"
+                          class="form-control"
+                          id="bui-co-borrower-modal-juridical-name"
+                          name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][NAME]"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-juridical-register-date"
+                        class="important"
+                        >რეგისტრაციის თარიღი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control date-range-picker-time only-date dropdowns"
+                        id="bui-co-borrower-modal-juridical-register-date"
+                        name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][REGISTER_DATE]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="row"
+                  data-child-showing="user_type_co"
+                  data-parent-showing-value="juridical"
+                  style="display: none"
+                >
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-juridical-actual-address"
+                        class="important"
+                        >ფაქტიური მისამართი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-juridical-actual-address"
+                        name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][ACTUAL_ADDRESS]"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-juridical-juridical-address"
+                        class="important"
+                        >იურიდიული მისამართი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-juridical-juridical-address"
+                        name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][JURIDICAL_ADDRESS]"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label for="bui-co-borrower-modal-juridical-email"
+                        >ელ-ფოსტა</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-juridical-email"
+                        name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][EMAIL]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="row"
+                  data-child-showing="user_type_co"
+                  data-parent-showing-value="juridical"
+                  style="display: none"
+                >
+                  <h5 class="col-12 mb-3 mt-4">ხელმომწერი პირი</h5>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-juridical-signer-name"
+                        class="important"
+                        >სახელი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-juridical-signer-name"
+                        name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][SIGNER_PERSON][NAME]"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-juridical-signer-surname"
+                        class="important"
+                        >გვარი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-juridical-signer-surname"
+                        name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][SIGNER_PERSON][SURNAME]"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-juridical-signer-personal-id"
+                        class="important"
+                        >პირადი ნომერი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-juridical-signer-personal-id"
+                        name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][SIGNER_PERSON][PERSONAL_ID]"
+                      />
+                    </div>
+                  </div>
+
+                  <div class="col">
+                    <div class="form-group">
+                      <label
+                        for="bui-co-borrower-modal-juridical-signer-phone"
+                        class="important"
+                        >ტელეფონი</label
+                      >
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="bui-co-borrower-modal-juridical-signer-phone"
+                        name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][SIGNER_PERSON][PHONE_NUMBER]"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div
+                  class="row"
+                  data-child-showing="user_type_co"
+                  data-parent-showing-value="juridical"
+                  style="display: none"
+                >
+                  <h5 class="col-12 mb-3 mt-4">დამფუძნებელი</h5>
+
+                  <div class="founders col-12">
+                    <div class="row founder">
+                      <div class="col">
+                        <div class="form-group">
+                          <label
+                            for="bui-add-user-form-juridical-founder-name"
+                            class="important"
+                            >სახელ-გვარი / დასახელება</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="bui-add-user-form-juridical-founder-name"
+                            name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][FOUNDER_PERSON][0][NAME]"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <div class="form-group">
+                          <label
+                            for="bui-add-user-form-juridical-founder-tax-code"
+                            class="important"
+                            >პ/ნ ან ს/კ</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="bui-add-user-form-juridical-founder-tax-code"
+                            name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][FOUNDER_PERSON][0][TAX_CODE]"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <div class="form-group">
+                          <label
+                            for="bui-add-user-form-juridical-founder-phone"
+                            class="important"
+                            >ტელეფონი</label
+                          >
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="bui-add-user-form-juridical-founder-phone"
+                            name="AGREEMENT[CO_BORROWERS][_index_][JURIDICAL_PERSON][FOUNDER_PERSON][0][PHONE_NUMBER]"
+                          />
+                        </div>
+                      </div>
+
+                      <div class="col">
+                        <label for="" class="d-block">&nbsp;</label>
+                        <button
+                          class="btn btn-primary add-button"
+                          type="button"
+                        >
+                          <i class="fas fa-plus"></i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+              <footer class="modal-card-foot">
+                <button type="button" class="btn btn-default" data-modal-close>
+                  დახურვა
+                </button>
+                <button type="submit" class="btn btn-primary">შენახვა</button>
+              </footer>
+            </form>
+          </div>
+        </div>
       </div>
     </main>
 
@@ -1122,6 +1927,62 @@
             e.preventDefault();
           }
         });
+
+      const coBorrowerModal = document.getElementById(
+        "bui-upload-adduser-co-borrower-modal",
+      );
+      const openCoBorrowerBtn = document.getElementById(
+        "open-co-borrower-modal",
+      );
+      const closeCoBorrowerBtns = coBorrowerModal.querySelectorAll(
+        "[data-modal-close], .modal-background",
+      );
+
+      const openCoBorrowerModal = () => {
+        coBorrowerModal.classList.add("is-active");
+        document.documentElement.classList.add("is-clipped");
+      };
+
+      const closeCoBorrowerModal = () => {
+        coBorrowerModal.classList.remove("is-active");
+        document.documentElement.classList.remove("is-clipped");
+      };
+
+      const toggleCoBorrowerSections = (selectedType) => {
+        const groups = coBorrowerModal.querySelectorAll("[data-child-showing]");
+        groups.forEach((group) => {
+          const parentKey = group.getAttribute("data-child-showing");
+          const parentValue = group.getAttribute("data-parent-showing-value");
+          if (parentKey === "user_type_co" && parentValue === selectedType) {
+            group.style.display = "";
+          } else if (parentKey === "user_type_co") {
+            group.style.display = "none";
+          }
+        });
+      };
+
+      const coBorrowerUserType = document.getElementById(
+        "bui-co-borrower-modal-user-type",
+      );
+      if (coBorrowerUserType) {
+        coBorrowerUserType.addEventListener("change", (event) => {
+          toggleCoBorrowerSections(event.target.value);
+        });
+      }
+
+      openCoBorrowerBtn.addEventListener("click", openCoBorrowerModal);
+      closeCoBorrowerBtns.forEach((btn) =>
+        btn.addEventListener("click", closeCoBorrowerModal),
+      );
+
+      document.addEventListener("keydown", (event) => {
+        if (
+          event.key === "Escape" &&
+          coBorrowerModal.classList.contains("is-active")
+        ) {
+          closeCoBorrowerModal();
+        }
+      });
     </script>
   </body>
 </html>
