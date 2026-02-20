@@ -35,6 +35,7 @@ body.sidebar-open .sidebar-overlay {
    Main issue: sidebar (280px) + 3 columns = cramped
    ============================================ */
 @media screen and (min-width: 1024px) and (max-width: 1399px) {
+
     /* Reduce sidebar width on laptops */
     :root {
         --sidebar-width: 240px;
@@ -52,14 +53,14 @@ body.sidebar-open .sidebar-overlay {
         display: flex !important;
     }
 
-    .columns.is-variable.is-desktop > .column.is-4-desktop {
+    .columns.is-variable.is-desktop>.column.is-4-desktop {
         flex: none !important;
         width: 50% !important;
         max-width: 50% !important;
     }
 
     /* Third column (charts) goes full width below */
-    .columns.is-variable.is-desktop > .column.is-4-desktop:nth-child(3) {
+    .columns.is-variable.is-desktop>.column.is-4-desktop:nth-child(3) {
         width: 100% !important;
         max-width: 100% !important;
     }
@@ -148,9 +149,10 @@ body.sidebar-open .sidebar-overlay {
     }
 
     /* Tables */
-    .custom-table td, .custom-table th {
+    .custom-table td,
+    .custom-table th {
         padding: 0.6rem 0.4rem !important;
-        font-size: 0.72rem;
+        font-size: 0.80rem;
     }
 
     .table-container-card {
@@ -258,6 +260,7 @@ body.sidebar-open .sidebar-overlay {
    TABLETS & SMALL LAPTOPS (768px - 1023px)
    ============================================ */
 @media screen and (max-width: 1023px) {
+
     /* Sidebar: hidden off-screen, slide in as overlay */
     .sidebar {
         transform: translateX(-100%);
@@ -286,7 +289,7 @@ body.sidebar-open .sidebar-overlay {
     }
 
     /* Dashboard 3 columns -> stack all */
-    .columns.is-desktop > .column.is-4-desktop {
+    .columns.is-desktop>.column.is-4-desktop {
         width: 100% !important;
         flex: none;
     }
@@ -405,6 +408,7 @@ body.sidebar-open .sidebar-overlay {
    MOBILE (max-width: 768px)
    ============================================ */
 @media screen and (max-width: 768px) {
+
     /* Navbar */
     .navbar {
         height: 70px;
@@ -554,7 +558,8 @@ body.sidebar-open .sidebar-overlay {
         gap: 10px;
     }
 
-    .btn-search, .btn-reset {
+    .btn-search,
+    .btn-reset {
         width: 100% !important;
         padding: 0 !important;
     }
@@ -701,7 +706,7 @@ body.sidebar-open .sidebar-overlay {
     }
 
     /* Upload page columns: 2-column grid on mobile */
-    .columns.is-multiline > .column.is-4 {
+    .columns.is-multiline>.column.is-4 {
         width: 50% !important;
         flex: none;
     }
@@ -762,7 +767,7 @@ body.sidebar-open .sidebar-overlay {
     }
 
     /* User cards: 1 per row on mobile */
-    .columns.is-multiline > .column.is-4:has(.user-card) {
+    .columns.is-multiline>.column.is-4:has(.user-card) {
         width: 100% !important;
     }
 
@@ -842,7 +847,7 @@ body.sidebar-open .sidebar-overlay {
         margin-bottom: 0.75rem;
     }
 
-    .submit-section .button.is-large + .button.is-large {
+    .submit-section .button.is-large+.button.is-large {
         margin-left: 0 !important;
     }
 
@@ -1019,7 +1024,7 @@ body.sidebar-open .sidebar-overlay {
     }
 
     /* Upload cards: single column */
-    .columns.is-multiline > .column.is-4 {
+    .columns.is-multiline>.column.is-4 {
         width: 100% !important;
     }
 
@@ -1115,6 +1120,7 @@ body.sidebar-open .sidebar-overlay {
    PRINT STYLES
    ============================================ */
 @media print {
+
     .navbar,
     .sidebar,
     .sidebar-overlay {
